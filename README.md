@@ -1,6 +1,6 @@
 # DevConnect
 
-**Current Version:** V0.1.0 (Pre-Alpha)
+**Current Version:** v0.1.0 (Pre-Alpha)
 
 DevConnect is a full-stack social platform built for developers to connect, share projects, showcase skills, exchange knowledge, and grow within the software development community. 
 
@@ -124,7 +124,7 @@ The primary goals of this project are to:
 
 - Custom Authentication
 - JWT
-- Secure HTTP Cookies
+- Secure HTTP cookies
 
 ### Deployment
 
