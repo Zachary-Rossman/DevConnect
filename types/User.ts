@@ -18,12 +18,13 @@ export type User = {
     _id: string;
     email: string;
     username: string;
-    password: string;
     firstName: string;
     lastName: string;
+    displayName?: string;
     birthday: string;
     city: string;
     country: string;
     techStack: string[];
-    accountCreatedDate: string;
+    createdAt: string;
+    updatedAt: string;
 };
