@@ -267,7 +267,7 @@ project-root/
 * [ ] User login
 * [ ] Session management
 * [ ] Protected routes
-* [ ] Authorization
+* [x] Authorization
 
 ---
   
