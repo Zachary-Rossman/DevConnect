@@ -264,9 +264,9 @@ project-root/
 ### Phase 2: Authentication
 
 * [x] User registration
-* [ ] User login
-* [ ] Session management
-* [ ] Protected routes
+* [x] User login
+* [x] Session management
+* [x] Protected routes
 * [x] Authorization
 
 ---
