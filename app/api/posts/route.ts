@@ -5,7 +5,49 @@ import { verifyToken } from "@/lib/auth";
 import Post from "@/models/Post";
 import User from "@/models/User";
 
-// Post Route
+// GET Route
+export async function GET() {
+    try {
+        await connectDB();
+
+        // Fetch Posts (Newest First)
+        const posts = await Post.find().sort({ createdAt: -1 });
+
+        // Attach Author Usernames
+        const postsWithUsers = await Promise.all(
+            posts.map(async (post) => {
+                const user = await User.findById(post.authorId);
+                return {
+                    _id: post._id,
+                    title: post.title,
+                    body: post.body,
+                    image: post.image,
+                    createdAt: post.createdAt,
+                    updatedAt: post.updatedAt,
+                    likes: post.likes,
+                    comments: post.comments,
+
+                    // Human-Readable Author Field
+                    author: user ? user.username : "Unknown",
+
+                    authorId: post.authorId,
+                };
+            })
+        );
+        
+        return NextResponse.json(postsWithUsers);
+    } catch (error) {
+        // Backend Logging Preserved For Debugging
+        console.error("GET /posts error:", error);
+        
+        return NextResponse.json(
+            { error: "Server Error" },
+            { status: 500 }
+        );
+    }
+}
+
+// POST Route
 export async function POST(request: Request) {
     try {
         await connectDB();
@@ -64,7 +106,7 @@ export async function POST(request: Request) {
         const post = await Post.create({
             title: body.title.trim(),
             body: body.body.trim(),
-            image: body.image?.trim(),
+            image: body.image?.trim() || "",
 
             // Server-Side Ownership Enforcement
             authorId: user._id,

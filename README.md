@@ -284,11 +284,12 @@ project-root/
 
 ### Phase 4: Posts
 
-* [ ] Create posts
+* [x] Create posts
+* [ ] Display posts
+* [ ] Individual post pages
 * [ ] Edit posts
 * [ ] Delete posts
 * [ ] Feed system
-* [ ] Individual post pages
 
 ---
 

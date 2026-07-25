@@ -9,9 +9,13 @@ export type Post = {
     title: string;
     body: string;
     image?: string;
+
     authorId: string;
+    author: string;
+
     createdAt: string;
     updatedAt: string;
+    
     likes: number;
     comments: number;
 }
