@@ -10,7 +10,10 @@ export type Post = {
     body: string;
     image?: string;
 
-    authorId: string;
+    authorId: {
+        _id: string;
+        username: string;
+    } | null;
     author: string;
 
     createdAt: string;

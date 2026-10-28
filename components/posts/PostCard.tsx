@@ -79,7 +79,7 @@ export default function PostCard({
                     {/* Footer Section */}
                     <div className="flex items-center justify-between pt-2 text-sm text-gray-500">
                         <span>
-                            By <strong>{post.author}</strong>
+                            By <strong>{post.authorId?.username ?? "Unknown"}</strong>
                         </span>
 
                         {/* CTA */}

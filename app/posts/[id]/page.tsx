@@ -60,7 +60,7 @@ export default async function PostPage({
                     <p className="text-gray-500">
                         Written by {" "}
                         <span className="font-medium text-gray-700">
-                            {post.authorId}
+                            {post.authorId?.username ?? "Unknown"}
                         </span>
                     </p>
 
