@@ -138,6 +138,12 @@ The primary goals of this project are to:
 project-root/
  
 ├── app/
+    ├── account/
+        ├── activity/
+            └── page.tsx
+        ├── settings/
+            └── page.tsx 
+        └── page.tsx 
     ├── api/
         ├── comments/
             └── route.ts
@@ -155,12 +161,6 @@ project-root/
             └── route.ts
         ├── users/
             └── route.ts
-    ├── dashboard/
-        ├── activity/
-            └── page.tsx
-        ├── settings/
-            └── page.tsx 
-        └── page.tsx 
     ├── login/
         └── page.tsx 
     ├── posts/
