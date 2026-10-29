@@ -64,7 +64,7 @@ export default function LoginForm() {
             // Authentication Success
             await refreshUser();
 
-            router.push("/dashboard");
+            router.push("/");
         } catch {
             // Network failures (offline, server unavailable, etc.)
             setError("Network error. Please try again.");

@@ -313,9 +313,9 @@ project-root/
 
 ---
 
-### Phase 7: Dashboard
+### Phase 7: Accounts
 
-* [ ] User dashboard
+* [ ] User account
 * [ ] Activity history
 * [ ] Account management
 * [ ] Profile settings
