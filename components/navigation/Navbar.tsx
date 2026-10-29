@@ -98,7 +98,7 @@ export default function Navbar() {
               <li>
                 <Link
                    href="/messages"
-                   className={navLinkClasses("/messages")}
+                   className={navLinkClasses("/account/messages")}
                 >
                   Messages
                 </Link>
@@ -110,7 +110,7 @@ export default function Navbar() {
               <li>
                 <Link
                    href="/myprofile"
-                   className={navLinkClasses("/myprofile")}
+                   className={navLinkClasses("/profile/[id]")}
                 >
                   My Profile
                 </Link>

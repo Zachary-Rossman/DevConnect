@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/components/auth/AuthProvider";
 
-export default function DashboardPage() {
+export default function AccountPage() {
     // Dashboard State
     const { user, loading } = useAuth();
     const router = useRouter();
@@ -41,14 +41,14 @@ export default function DashboardPage() {
     return (
         <main
             className="max-w-6xl mx-auto px-6 py-12 space-y-10"
-            aria-labelledby="dashboard-title"
+            aria-labelledby="my-account-title"
         >
             <section className="space-y-2">
                 <h1
-                    id="dashboard-title"
+                    id="my-account-title"
                     className="text-4xl font-bold tracking-tight"
                 >
-                    Dashboard
+                    My Account
                 </h1>
 
                 <p className="text-gray-500">
