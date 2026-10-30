@@ -1,6 +1,17 @@
+import { cookies } from "next/headers";
 import CreateAccountForm from "@/components/auth/CreateAccountForm";
+import { redirect } from "next/navigation";
+import { verifyToken } from "@/lib/auth";
 
-export default function RegisterPage() {
+export default async function RegisterPage() {
+  //Check Authentication
+  const cookieStore = await cookies();
+  const token = cookieStore.get("auth_token")?.value;
+
+  // Redirect Authenticated Users To Feed
+  if (token && verifyToken(token)) {
+    redirect("/feed");
+  }
   // REGISTER PAGE (SERVER ROUTE COMPONENT)
   return (
     <main
