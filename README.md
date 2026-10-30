@@ -200,7 +200,8 @@ project-root/
     ├── auth/
         ├── AuthProvider.tsx
         ├── CreateUserForm.tsx
-        └── LoginForm.tsx
+        ├── LoginForm.tsx
+        └── LogoutConfirmation.tsx
     ├── comments/
         ├── CommentCard.tsx
         └── CommentForm.tsx

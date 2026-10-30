@@ -1,21 +1,16 @@
 "use client";
 
 import Link from "next/link"
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 import { useAuth } from "@/components/auth/AuthProvider";
 
 export default function Navbar() {
 
   // Next.js Navigation
   const pathname = usePathname();
-  const router = useRouter();
 
   // Authentication State
-  const {
-    user,
-    loading,
-    refreshUser
-  } = useAuth();
+  const { user, loading } = useAuth();
 
   // Active Navigation Styling
   function navLinkClasses(path: string) {
@@ -33,17 +28,6 @@ export default function Navbar() {
       }
     `;
   }
-
-  // Handle Logout
-    async function handleLogout() {
-      await fetch("/api/logout", {
-        method: "POST",
-      });
-
-      await refreshUser();
-
-      router.push("/login");
-    }
 
   return (
     <header className="sticky top-0 z-50 border-b bg-white/80 backdrop-blur">
@@ -66,14 +50,17 @@ export default function Navbar() {
              role="list"
              className="flex items-center gap-2"
           >
-            <li>
-              <Link
-                 href="/"
-                 className={navLinkClasses("/")}
-              >
-                Home
-              </Link>
-            </li>
+            {/* Logged In User's Profile Only Visible For Authenticated Users */}
+            {user && (
+              <li>
+                <Link
+                   href="/feed"
+                   className={navLinkClasses("/feed")}
+                >
+                  Feed
+                </Link>
+              </li>
+            )}
 
             <li>
               <Link
@@ -97,7 +84,7 @@ export default function Navbar() {
             {user && (
               <li>
                 <Link
-                   href="/messages"
+                   href="/account/messages"
                    className={navLinkClasses("/account/messages")}
                 >
                   Messages
@@ -109,8 +96,8 @@ export default function Navbar() {
             {user && (
               <li>
                 <Link
-                   href="/myprofile"
-                   className={navLinkClasses("/profile/[id]")}
+                   href="/profile"
+                   className={navLinkClasses("/profile")}
                 >
                   My Profile
                 </Link>
@@ -148,12 +135,12 @@ export default function Navbar() {
                 {user.username}
               </span>
 
-              <button
-                 onClick={handleLogout}
+              <Link
+                 href="/logout"
                  className="rounded-lg border border-red-300 px-4 py-2 text-red-600 transition hover:bg-red-50"
               >
                 Logout
-              </button>
+              </Link>
             </div>
           ) : (
             // Guest Navigation
