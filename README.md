@@ -162,6 +162,10 @@ project-root/
         ├── me/
             └── route.ts
         ├── posts/
+            ├── [id]/
+                └── route.ts
+            ├── mine/
+                └── route.ts
             └── route.ts
         ├── profiles/
             └── route.ts
