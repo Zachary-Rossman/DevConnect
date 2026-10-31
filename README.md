@@ -181,7 +181,9 @@ project-root/
         └── page.tsx 
     ├── posts/
         ├──[id]/
-            ├──edit/
+            ├── edit/
+                ├── error.tsx
+                ├── loading.tsx
                 └── page.tsx
             └── page.tsx
         ├── new/
@@ -304,8 +306,8 @@ project-root/
 * [x] Create posts
 * [x] Display posts
 * [x] Individual post pages
-* [ ] Edit posts
-* [ ] Delete posts
+* [x] Edit posts
+* [] Delete posts
 * [ ] Feed system
 
 ---

@@ -95,7 +95,7 @@ export async function DELETE(
 }
 
 // UPDATE Post Owned By Authenticated User
-export async function PUT(
+export async function PATCH(
     request: Request,
     { params }: {params: Promise<{ id: string }> }
 ) {
@@ -145,9 +145,7 @@ export async function PUT(
         }
 
         // Ownership Check
-        if (
-            post.authorId.toString() !== payload.userId
-        ) {
+        if (post.authorId.toString() !== payload.userId) {
             return NextResponse.json(
                 { error: "Forbidden" },
                 { status: 403 }
@@ -157,11 +155,7 @@ export async function PUT(
         // Read Update Payload
         const body = await request.json();
 
-        if (
-            !body ||
-            typeof body !== "object" ||
-            Array.isArray(body)
-        ) {
+        if (!body || typeof body !== "object" || Array.isArray(body)) {
             return NextResponse.json(
                 { error: "Invalid Request Body" },
                 { status: 400 }
@@ -205,7 +199,26 @@ export async function PUT(
                 );
             }
 
-            updates.image = body.image.trim();
+            const image = body.image.trim();
+
+            if (image !== "") {
+                try {
+                    const imageUrl = new URL(image);
+
+                    if (!["http:", "https:"].includes(imageUrl.protocol)) {
+                        return NextResponse.json(
+                            { error: "Image Must Use HTTP or HTTPS" },
+                            { status: 400 }
+                        );
+                    }
+                } catch {
+                    return NextResponse.json(
+                        { error: "Invalid Image URL" },
+                        { status: 400 }
+                    );
+                }
+            }
+            updates.image = image;
         }
 
         if (Object.keys(updates).length === 0) {
@@ -232,7 +245,7 @@ export async function PUT(
 
         return NextResponse.json(updatedPost);
     } catch (error) {
-        console.error("PUT /api/posts/[id] error:", error);
+        console.error("PATCH /api/posts/[id] error:", error);
 
         if (error instanceof SyntaxError) {
             return NextResponse.json(
