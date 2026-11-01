@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 
 export default function MessagesPage() {
 
-    // Dashboard State
+    // Messages State
         const { user, loading } = useAuth();
         const router = useRouter();
     

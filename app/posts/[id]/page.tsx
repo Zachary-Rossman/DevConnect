@@ -1,7 +1,8 @@
-import Link from "next/link";
 import { cookies } from "next/headers";
-
 import { getPost } from "@/lib/posts";
+import Link from "next/link";
+import PostOptions from "@/components/posts/PostOptions";
+import { verifyToken } from "@/lib/auth";
 
 // Post Detail Page
 export default async function PostPage({
@@ -14,11 +15,6 @@ export default async function PostPage({
 
     // Fetch Post From Database
     const post = await getPost(id);
-
-    // Auth Cookie Access
-    const cookieStore = await cookies();
-
-    const authCookie = cookieStore.toString();
 
     // Not Found State
     if (!post) {
@@ -43,6 +39,19 @@ export default async function PostPage({
         );
     }
 
+    // Read Auth Cookie
+    const cookieStore = await cookies();
+    const token = cookieStore.get("auth_token")?.value;
+
+    // Verify Auth Token
+    const decoded = token ? verifyToken(token) : null;
+
+    // Check Post Ownership
+    const isOwner = Boolean(
+        decoded && post.authorId && String(decoded.userId) === String(post.authorId._id)
+    );
+
+    // Render Post
     return (
         <main
            className="min-h-screen bg-gray-50"
@@ -50,6 +59,9 @@ export default async function PostPage({
         >
             <article className="max-w-4xl mx-auto px-6 py-14 space-y-10">
                 <header className="space-y-5">
+                    {isOwner && (
+                        <PostOptions postId={String(post._id)} />
+                    )}
                     <h1
                        id="post-title"
                        className="text-5xl font-bold tracking-tight text-gray-900"
