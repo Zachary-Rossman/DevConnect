@@ -220,6 +220,7 @@ project-root/
         ├── EditPostForm.tsx
         ├── PostCard.tsx
         ├── PostList.tsx
+        ├── PostOptions.tsx
         └── PostReactionButton.tsx
     └── ui/
         ├── Button.tsx
@@ -307,7 +308,7 @@ project-root/
 * [x] Display posts
 * [x] Individual post pages
 * [x] Edit posts
-* [] Delete posts
+* [x] Delete posts
 * [ ] Feed system
 
 ---
