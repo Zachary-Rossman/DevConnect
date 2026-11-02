@@ -17,7 +17,27 @@ export async function getPosts() {
         })
         .lean();
 
-    return posts;
+    return posts.map((post) => ({
+        _id: post._id.toString(),
+        title: post.title,
+        body: post.body,
+        image: post.image,
+
+        authorId: post.authorId 
+        ? {
+            _id: post.authorId._id.toString(),
+            username: post.authorId.username,
+          }
+        : null,
+
+        author: post.authorId?.username ?? "Unknown",
+
+        likes: post.likes,
+        comments: post.comments,
+
+        createdAt: post.createdAt.toISOString(),
+        updatedAt: post.updatedAt.toISOString(),
+    }));
 }
 
 // Get Single Post

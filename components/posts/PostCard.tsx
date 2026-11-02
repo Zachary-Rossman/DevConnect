@@ -39,22 +39,7 @@ export default function PostCard({
             <Link
                 href={`/posts/${post._id}`}
                 aria-label={`Read post: ${post.title}`}
-                className="
-                    block
-                    overflow-hidden
-                    rounded-2xl
-                    border
-                    bg-white
-                    shadow-sm
-                    transition-all
-                    duration-300
-                    hover:-translate-y-1
-                    hover:shadow-xl
-                    focus:outline-none
-                    focus:ring-2
-                    focus:ring-blue-600
-                "
-            >
+                className="block overflow-hidden rounded-2xl border bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl focus:outline-none focus:ring-2  focus:ring-blue-600">
                 <div className="space-y-4 p-6">
                     {/* Title */}
                     <h2 className="text-2xl font-bold leading-tight text-gray-900">

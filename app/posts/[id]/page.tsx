@@ -15,7 +15,7 @@ export default async function PostPage({
 
     // Fetch Post From Database
     const post = await getPost(id);
-
+    
     // Not Found State
     if (!post) {
         return (
