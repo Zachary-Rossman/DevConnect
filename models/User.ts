@@ -22,18 +22,6 @@ const UserSchema = new mongoose.Schema({
         required: true,
     },
 
-    firstName: {
-        type: String,
-        trim: true,
-        required: true,
-    },
-
-    lastName: {
-        type: String,
-        trim: true,
-        required: true,
-    },
-
     displayName: {
         type: String,
         trim: true,
@@ -42,23 +30,6 @@ const UserSchema = new mongoose.Schema({
     birthday: {
         type: Date,
         required: true,
-    },
-
-    city: {
-        type: String,
-        trim: true,
-        required: true,
-    },
-
-    country: {
-        type: String,
-        trim: true,
-        required: true,
-    },
-
-    techStack: {
-        type: [String],
-        default: [],
     },
 },
 {
