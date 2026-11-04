@@ -7,6 +7,7 @@ export type CreateUserInput = {
     birthday: string;
     city: string;
     country: string;
+    techStack?: string[];
 };
 
 export type LoginInput = {

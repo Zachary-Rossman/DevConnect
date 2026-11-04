@@ -1,6 +1,7 @@
-import { connectDB } from "@/lib/mongodb";
-import User from "@/models/User";
 import bcrypt from "bcrypt";
+import { connectDB } from "@/lib/mongodb";
+import Profile from "@/models/Profile";
+import User from "@/models/User";
 
 // POST Route (CREATE USER (REGISTER))
 
@@ -19,6 +20,7 @@ export async function POST(request: Request) {
             birthday,
             city,
             country,
+            techStack = [],
         } = body;
 
         // Validate Required Fields
@@ -113,6 +115,20 @@ export async function POST(request: Request) {
             );
         }
 
+        // Validate Tech Stack
+        if (
+            !Array.isArray(techStack) ||
+            !techStack.every(
+                (skill: unknown) => 
+                    typeof skill === "string" && skill.trim().length > 0
+            )
+        ) {
+            return Response.json(
+                { error: "Tech stack must be an array of non-empty strings" },
+                { status: 400 }
+            );
+        }
+
         // Check for an existing user to prevent duplicate accounts
         const existingUser = await User.findOne({
             $or: [
@@ -140,27 +156,37 @@ export async function POST(request: Request) {
             email,
             username,
             password: hashedPassword,
+            birthday,
+        });
+
+        // Create New Profile Document
+        const newProfile = await Profile.create({
+            userId: newUser._id,
             firstName,
             lastName,
-            birthday,
             city,
             country,
+            techStack,
         });
 
         // Success Response
         return Response.json({
-            message: "User created successfully",
+            message: "User and profile created successfully",
             user: {
                 id: newUser._id,
-                firstName: newUser.firstName,
-                lastName: newUser.lastName,
                 email: newUser.email,
                 username: newUser.username,
             },
+            profile: {
+                id: String(newProfile._id),
+                firstName: newProfile.firstName,
+                lastName: newProfile.lastName,
+                city: newProfile.city,
+                country: newProfile.country,
+                techStack: newProfile.techStack,
+            },
         },
-        {
-            status: 201,
-        }
+        { status: 201 }
     );
     } catch (error) {
         console.error("POST /users error:", error);
