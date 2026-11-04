@@ -18,13 +18,7 @@ export type User = {
     _id: string;
     email: string;
     username: string;
-    firstName: string;
-    lastName: string;
-    displayName?: string;
     birthday: string;
-    city: string;
-    country: string;
-    techStack: string[];
     createdAt: string;
     updatedAt: string;
 };

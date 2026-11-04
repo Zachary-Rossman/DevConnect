@@ -19,11 +19,6 @@ const ProfileSchema = new mongoose.Schema({
         trim: true,
         required: true,
     },
-    displayName: {
-        type: String,
-        trim: true,
-        required: true,
-    },
     city: {
         type: String,
         trim: true,

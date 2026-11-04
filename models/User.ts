@@ -22,11 +22,6 @@ const UserSchema = new mongoose.Schema({
         required: true,
     },
 
-    displayName: {
-        type: String,
-        trim: true,
-    },
-
     birthday: {
         type: Date,
         required: true,
