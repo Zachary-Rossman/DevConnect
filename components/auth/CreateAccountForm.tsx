@@ -92,7 +92,7 @@ export default function CreateAccountForm() {
 
             // Small delay so users can read the success message
             setTimeout(() => {
-                router.push("/login");
+                router.push("/profile/[username]");
             }, 1200);
         } catch {
             // Hnadles network failures such as no internet connection or an unreachable server

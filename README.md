@@ -190,7 +190,7 @@ project-root/
             └── page.tsx 
         └── page.tsx
     ├── profile/
-        ├──[id]/
+        ├──[username]/
             ├── edit/
                 └── page.tsx
             └── page.tsx 
