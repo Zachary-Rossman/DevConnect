@@ -1,7 +1,9 @@
 import bcrypt from "bcrypt";
 import { connectDB } from "@/lib/mongodb";
 import mongoose from "mongoose";
+import { NextResponse } from "next/server";
 import Profile from "@/models/Profile";
+import { signToken } from "@/lib/auth";
 import User from "@/models/User";
 
 // POST Route (CREATE USER (REGISTER))
@@ -179,7 +181,11 @@ export async function POST(request: Request) {
             
             return { newUser, newProfile };
         });
-        return Response.json({
+        // Generate JWT After Successful Transaction
+        const token = signToken(String(newUser._id));
+
+        // Build Registration Success Response
+        const response = NextResponse.json({
             message: "User and profile created successfully.",
             user: {
                 id: String(newUser._id),
@@ -194,7 +200,20 @@ export async function POST(request: Request) {
                 country: newProfile.country,
                 techStack: newProfile.techStack,
             },
-        }, { status: 201 });
+        }, { status: 201 }
+    );
+
+    // Set Authentication Cookie
+    response.cookies.set("auth_token", token, {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === "production",
+        sameSite: "strict",
+        path: "/",
+        maxAge: 60 * 60 * 24 * 7,
+    });
+
+    // Return Response
+    return response; 
     } catch (error) {
         console.error("POST /users error:", error);
 

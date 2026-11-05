@@ -1,11 +1,13 @@
 "use client";
 
+import { useAuth } from "./AuthProvider";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import type { CreateUserInput } from "@/types/User";
 
 export default function CreateAccountForm() {
     const router = useRouter();
+    const { refreshUser } = useAuth();
 
     // Form State
     const [email, setEmail] = useState("");
@@ -90,9 +92,12 @@ export default function CreateAccountForm() {
             // Show success feedback before redirecting
             setSuccess("Account created successfully!");
 
+            // Update AuthProvider
+            await refreshUser();
+
             // Small delay so users can read the success message
             setTimeout(() => {
-                router.push("/profile/[username]");
+                router.push(`/profile/${encodeURIComponent(data.user.username)}`);
             }, 1200);
         } catch {
             // Hnadles network failures such as no internet connection or an unreachable server
