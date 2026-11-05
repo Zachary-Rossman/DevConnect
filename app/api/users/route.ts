@@ -1,5 +1,6 @@
 import bcrypt from "bcrypt";
 import { connectDB } from "@/lib/mongodb";
+import mongoose from "mongoose";
 import Profile from "@/models/Profile";
 import User from "@/models/User";
 
@@ -151,29 +152,37 @@ export async function POST(request: Request) {
         // Hash Password
         const hashedPassword = await bcrypt.hash(password, 10);
 
-        // Create New User Document
-        const newUser = await User.create({
-            email,
-            username,
-            password: hashedPassword,
-            birthday,
+        // Create User And Profile In A Single Transaction
+        const { newUser, newProfile } = await mongoose.connection.transaction(async (session) => {
+            // Create New User Document
+            const [newUser] = await User.create(
+                [{
+                    email,
+                    username,
+                    password: hashedPassword,
+                    birthday,
+                }],
+                { session }
+            );
+            // Create New Profile Document
+            const [newProfile] = await Profile.create(
+                [{
+                    userId: newUser._id,
+                    firstName,
+                    lastName,
+                    city,
+                    country,
+                    techStack,
+                }],
+                { session }
+            );
+            
+            return { newUser, newProfile };
         });
-
-        // Create New Profile Document
-        const newProfile = await Profile.create({
-            userId: newUser._id,
-            firstName,
-            lastName,
-            city,
-            country,
-            techStack,
-        });
-
-        // Success Response
         return Response.json({
-            message: "User and profile created successfully",
+            message: "User and profile created successfully.",
             user: {
-                id: newUser._id,
+                id: String(newUser._id),
                 email: newUser.email,
                 username: newUser.username,
             },
@@ -185,9 +194,7 @@ export async function POST(request: Request) {
                 country: newProfile.country,
                 techStack: newProfile.techStack,
             },
-        },
-        { status: 201 }
-    );
+        }, { status: 201 });
     } catch (error) {
         console.error("POST /users error:", error);
 
