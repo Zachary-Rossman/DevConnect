@@ -168,6 +168,8 @@ project-root/
                 └── route.ts
             └── route.ts
         ├── profiles/
+            ├── [username]/
+                    └── route.ts
             └── route.ts
         ├── reactions/
             └── route.ts
