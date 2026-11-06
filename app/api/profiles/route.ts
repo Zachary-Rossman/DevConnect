@@ -8,11 +8,18 @@ export async function GET() {
     try {
         await connectDB();
 
-        // Fetch Profile
+        // Fetch Profiles
         const profiles = await Profile.find();
 
-        // Attach Author Username
-        const profileWithDetails = await Promise.all(
+        if (profiles.length === 0) {
+            return NextResponse.json(
+                { error: "No Profiles Found" },
+                { status: 404 }
+            );
+        }
+
+        // Attach Username
+        const profilesWithUsername = await Promise.all(
             profiles.map(async (profile) => {
                 const user = await User.findById(profile.userId);
                 return {
@@ -24,15 +31,17 @@ export async function GET() {
                     techStack: profile.techStack,
 
                     // Human-Readable Username Field
-                    username: user ? user.username : "Unknown",
+                    username: user ? user.username : "Unknown User",
                 };
             })
         );
 
-        return NextResponse.json(profileWithDetails);
+        return NextResponse.json(profilesWithUsername,
+            { status: 200 }
+        );
     } catch (error) {
         // Backend Logging Preserved For Debugging
-        console.error("GET /profile error:", error);
+        console.error("GET /profiles error:", error);
 
         return NextResponse.json(
             { error: "Server Error" },
