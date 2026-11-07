@@ -224,6 +224,12 @@ project-root/
         ├── PostList.tsx
         ├── PostOptions.tsx
         └── PostReactionButton.tsx
+    ├── profile/
+        ├── Bio.tsx
+        ├── EditOption.tsx
+        ├── PostFeedProfile.tsx
+        ├── TechStack.tsx
+        └── UserInfo.tsx
     └── ui/
         ├── Button.tsx
         ├── TextBox.tsx
