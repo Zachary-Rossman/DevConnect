@@ -1,3 +1,4 @@
+import Bio from "@/components/profile/Bio";
 import { connectDB } from "@/lib/mongodb";
 import { notFound } from "next/navigation";
 import type { Profile } from "@/types/Profile";
@@ -50,6 +51,7 @@ export default async function ProfileIndividualPage({
     return (
         <main className="mx-auto max-w-5xl px-4 py-8">
             <UserInfo profile={profile} />
+            <Bio bio={profile.bio} />
         </main>
     );
 }
