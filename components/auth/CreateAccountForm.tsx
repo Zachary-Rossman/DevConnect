@@ -18,11 +18,47 @@ export default function CreateAccountForm() {
     const [birthday, setBirthday] = useState("");
     const [city, setCity] = useState("");
     const [country, setCountry] = useState("");
+    const [techStack, setTechStack] = useState<string[]>([""]);
 
     // UI State
     const [loading, setLoading] = useState(false);
     const [success, setSuccess] = useState<string | null>(null);
     const [error, setError] = useState<string | null>(null);
+
+    // Add To TechStack
+    function addTechnology() {
+      setTechStack((current) => {
+        // Prevent Adding Anohter Input If Input Is Empty
+        if (!current[current.length -1].trim()) {
+          return current;
+        }
+
+        return [...current, ""];
+      });
+    }
+
+    // Remove Skill From TechStack
+    function removeTechnology(indexToRemove: number) {
+      setTechStack((current) => {
+        // Always Keep At Least One Input Visible
+        if (current.length <=1) {
+          return current;
+        }
+
+        return current.filter(
+          (_, index) => index !== indexToRemove
+        );
+      });
+    }
+
+    // Update TechStack
+    function updateTechnology(index: number, value: string) {
+      setTechStack((current) =>
+        current.map((skill, i) =>
+          i === index ? value: skill
+    )
+  );
+}
 
     // Workflow
     async function handleSubmit(e?: React.FormEvent) {
@@ -61,6 +97,9 @@ export default function CreateAccountForm() {
         setLoading(true);
 
         try {
+            // Clean Tech Stack Array
+            const cleanedTechSTack = techStack.map((skill) => skill.trim()).filter((skill) => skill.length > 0);
+
             // Build request payload using the shared type
             const newUser: CreateUserInput = {
                 email,
@@ -71,6 +110,7 @@ export default function CreateAccountForm() {
                 birthday,
                 city,
                 country,
+                techStack: cleanedTechSTack,
             };
 
             const response = await fetch("/api/users", {
@@ -279,6 +319,51 @@ export default function CreateAccountForm() {
           disabled={loading}
           autoComplete="family-name"
         />
+      </div>
+
+      {/* Tech Stack */}
+      
+      <div className="space-y-3">
+        <label className="text-sm font-medium">
+          Tech Stack
+        </label>
+
+        {techStack.map((skill, index) => (
+          <div key={index} className="flex gap-2">
+            <input
+             key={index}
+             type="text"
+             value={skill}
+             onChange={(e) =>
+              updateTechnology(index, e.target.value)
+             }
+             placeholder="Enter A Technology"
+             className="w-full rounded-md border px-3 py-2"
+             disabled={loading}
+            />
+
+            <button
+               type="button"
+               onClick={() => removeTechnology(index)}
+               disabled={loading || techStack.length === 1 || !skill.trim()}
+               className="rounded-md border px-4 py-2"
+            >
+              Remove
+            </button>
+          </div>
+        ))}
+
+        <button
+           type="button"
+           onClick={addTechnology}
+           disabled={
+            loading ||
+            !techStack[techStack.length - 1].trim()
+          }
+           className="rounded-md border px-4 py-2"
+        >
+          + Add Technology
+        </button>
       </div>
 
       {/* SUBMIT BUTTON */}
