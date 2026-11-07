@@ -42,6 +42,7 @@ export async function GET(_request: Request, { params }: { params: Promise<{user
             username: user.username,
             firstName: profile.firstName,
             lastName: profile.lastName,
+            bio: profile.bio ?? "",
             city: profile.city,
             country: profile.country,
             techStack: profile.techStack,

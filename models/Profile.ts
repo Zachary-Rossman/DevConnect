@@ -19,16 +19,25 @@ const ProfileSchema = new mongoose.Schema({
         trim: true,
         required: true,
     },
+
+    bio: {
+        type: String,
+        trim: true,
+        required: false,
+    },
+    
     city: {
         type: String,
         trim: true,
         required: false,
     },
+
     country: {
         type: String,
         trim: true,
         required: true,
     },
+    
     techStack: {
         type: [String],
         default: [],
