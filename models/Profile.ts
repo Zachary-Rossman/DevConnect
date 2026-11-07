@@ -23,7 +23,7 @@ const ProfileSchema = new mongoose.Schema({
     bio: {
         type: String,
         trim: true,
-        required: false,
+        default: "",
     },
     
     city: {

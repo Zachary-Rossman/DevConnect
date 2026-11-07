@@ -226,6 +226,7 @@ project-root/
         └── PostReactionButton.tsx
     ├── profile/
         ├── Bio.tsx
+        ├── EditBio.tsx
         ├── PostFeedProfile.tsx
         ├── ProfileActions.tsx
         ├── TechStack.tsx
