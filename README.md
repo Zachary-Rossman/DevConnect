@@ -242,8 +242,7 @@ project-root/
 ├── lib/
     ├── auth.ts
     ├── mongodb.ts
-    ├── posts.ts
-    └── profiles.ts
+    └── posts.ts
 
 ├── models/
     ├── Comment.ts
