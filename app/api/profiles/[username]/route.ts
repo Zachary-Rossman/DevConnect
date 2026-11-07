@@ -16,6 +16,14 @@ export async function GET(_request: Request, { params }: { params: Promise<{user
         // Fetch User
         const user = await User.findOne({ username });
 
+        // Check If User Exists
+        if (!user) {
+            return NextResponse.json(
+                { error: "User Not Found" },
+                { status: 404 }
+            );
+        }
+        
         // Fetch Profile
         const profile = await Profile.findOne({
             userId: user._id,
