@@ -194,6 +194,8 @@ project-root/
     ├── profile/
         ├──[username]/
             ├── edit/
+                ├── error.tsx
+                ├── loading.tsx
                 └── page.tsx
             └── page.tsx 
         └── page.tsx 
