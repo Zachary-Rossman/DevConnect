@@ -5,7 +5,6 @@ import { usePathname } from "next/navigation";
 import { useAuth } from "@/components/auth/AuthProvider";
 
 export default function Navbar() {
-
   // Next.js Navigation
   const pathname = usePathname();
 
@@ -96,8 +95,8 @@ export default function Navbar() {
             {user && (
               <li>
                 <Link
-                   href="/profile"
-                   className={navLinkClasses("/profile")}
+                   href={`/profile/${user.username}`}
+                   className={navLinkClasses(`/profile/${user.username}`)}
                 >
                   My Profile
                 </Link>
