@@ -1,5 +1,6 @@
 import { connectDB } from "@/lib/mongodb";
 import { cookies } from "next/headers";
+import EditProfileForm from "@/components/profile/EditProfileForm";
 import { notFound, redirect } from "next/navigation";
 import type { Profile } from "@/types/Profile";
 import ProfileModel from "@/models/Profile";
@@ -73,9 +74,7 @@ export default async function EditProfilePage({
                 Edit Profile
             </h1>
 
-            <p className="mt-2 text-gray-500">
-                Editing profile for @{profile.username}
-            </p>
+            <EditProfileForm profile={profile} />
         </main>
     );
 }

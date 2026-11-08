@@ -229,6 +229,7 @@ project-root/
     ├── profile/
         ├── Bio.tsx
         ├── EditBio.tsx
+        ├── EditProfileForm.tsx
         ├── PostFeedProfile.tsx
         ├── ProfileActions.tsx
         ├── TechStack.tsx

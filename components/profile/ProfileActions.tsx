@@ -1,5 +1,3 @@
-"use client";
-
 import Link from "next/link";
 
 type ProfileOptionsProps = {
@@ -18,5 +16,5 @@ export default function ProfileActions({
                 Edit Profile
             </Link>
         </div>
-    )
+    );
 }
