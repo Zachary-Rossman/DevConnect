@@ -1,6 +1,9 @@
 import Bio from "@/components/profile/Bio";
 import { connectDB } from "@/lib/mongodb";
 import { notFound } from "next/navigation";
+import Post from "@/models/Post";
+import type { Post as PostType } from "@/types/Post";
+import PostFeedProfile from "@/components/profile/PostFeedProfile";
 import type { Profile } from "@/types/Profile";
 import profileModel from "@/models/Profile";
 import TechStack from "@/components/profile/TechStack";
@@ -36,6 +39,30 @@ export default async function ProfileIndividualPage({
         notFound();
     }
 
+    // Fetch Posts Belonging To This User
+    const userPosts = await Post.find({
+        authorId: user._id,
+    })
+        .sort({ createdAt: -1 })
+        .lean();
+
+    // Convert MongoDB Posts Into Plain Objects
+    const posts: PostType[] = userPosts.map((post) => ({
+        _id: String(post._id),
+        title: post.title,
+        body: post.body,
+        image: post.image,
+        likes: post.likes,
+        comments: post.comments,
+        author: user.username,
+        authorId: {
+            _id: String(user._id),
+            username: user.username,
+        },
+        createdAt: post.createdAt.toISOString(),
+        updatedAt: post.updatedAt.toISOString(),
+    }));
+
     // Build Public Profile Object
     const profile: Profile = {
         _id: String(profileDocument._id),
@@ -50,10 +77,11 @@ export default async function ProfileIndividualPage({
 
     // Pass Profile Data Into UserInfo
     return (
-        <main className="mx-auto max-w-5xl px-4 py-8">
+        <main className="mx-auto max-w-5xl space-y-6 px-4 py-8">
             <UserInfo profile={profile} />
             <Bio bio={profile.bio} />
             <TechStack techStack={profile.techStack} />
+            <PostFeedProfile posts={posts} />
         </main>
     );
 }
