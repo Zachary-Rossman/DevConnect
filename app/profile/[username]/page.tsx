@@ -3,6 +3,7 @@ import { connectDB } from "@/lib/mongodb";
 import { notFound } from "next/navigation";
 import type { Profile } from "@/types/Profile";
 import profileModel from "@/models/Profile";
+import TechStack from "@/components/profile/TechStack";
 import User from "@/models/User";
 import UserInfo from "@/components/profile/UserInfo";
 
@@ -52,6 +53,7 @@ export default async function ProfileIndividualPage({
         <main className="mx-auto max-w-5xl px-4 py-8">
             <UserInfo profile={profile} />
             <Bio bio={profile.bio} />
+            <TechStack techStack={profile.techStack} />
         </main>
     );
 }
