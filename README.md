@@ -304,10 +304,10 @@ project-root/
 ### Phase 3: Developer Profiles
 
 * [x] Profile creation
-* [ ] Profile editing
+* [x] Profile editing
 * [ ] Avatar support
-* [ ] Bio section
-* [ ] Skills management
+* [x] Bio section
+* [x] Skills management
 * [ ] Social links
 
 ---

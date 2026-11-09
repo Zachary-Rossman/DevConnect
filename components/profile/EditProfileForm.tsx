@@ -108,7 +108,7 @@ async function handleUpdate(e: FormEvent<HTMLFormElement>) {
         };
         
         const response = await fetch(
-            `api/profiles/${encodeURIComponent(profile.username)}`,
+            `/api/profiles/${encodeURIComponent(profile.username)}`,
             {
                 method: "PATCH",
                 headers: {
