@@ -1,9 +1,9 @@
 import { connectDB } from "@/lib/mongodb";
 import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
-import { verifyToken } from "@/lib/auth";
 import Post from "@/models/Post";
 import User from "@/models/User";
+import { verifyToken } from "@/lib/auth";
 
 // GET Route
 export async function GET() {
