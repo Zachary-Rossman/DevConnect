@@ -3,12 +3,14 @@ import mongoose from "mongoose";
 const ReactionSchema = new mongoose.Schema(
     {
         postId: {
-            type: String,
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Post",
             required: true,
         },
 
         userId: {
-            type: String,
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "User",
             required: true,
         },
 
@@ -33,6 +35,7 @@ ReactionSchema.index(
         unique: true,
     }
 );
+
 const Reaction =
     mongoose.models.Reaction ||
     mongoose.model("Reaction", ReactionSchema);
