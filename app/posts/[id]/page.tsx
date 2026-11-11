@@ -2,6 +2,8 @@ import { cookies } from "next/headers";
 import { getPost } from "@/lib/posts";
 import Link from "next/link";
 import PostOptions from "@/components/posts/PostOptions";
+import PostReactionButton from "@/components/posts/PostReactionButton";
+import Reaction from "@/models/Reaction";
 import { verifyToken } from "@/lib/auth";
 
 // Post Detail Page
@@ -39,6 +41,14 @@ export default async function PostPage({
         );
     }
 
+    // Convert MongoDb Post ID To String
+    const postId = String(post._id);
+
+    // Find Current Like Count
+    const initialCount = await Reaction.countDocuments({
+        postId,
+    });
+
     // Read Auth Cookie
     const cookieStore = await cookies();
     const token = cookieStore.get("auth_token")?.value;
@@ -50,6 +60,16 @@ export default async function PostPage({
     const isOwner = Boolean(
         decoded && post.authorId && String(decoded.userId) === String(post.authorId._id)
     );
+
+    // Check If Post Has A Reaction
+    const initialLiked = decoded
+        ? Boolean(
+            await Reaction.exists({
+                postId,
+                userId: decoded.userId,
+            })
+        )
+        : false;
 
     // Render Post
     return (
@@ -93,6 +113,12 @@ export default async function PostPage({
                         {post.body}
                     </p>
                 </section>
+
+                <PostReactionButton
+                   postId={postId}
+                   initialLiked={initialLiked}
+                   initialCount={initialCount}
+                />
             </article>
         </main>
     );

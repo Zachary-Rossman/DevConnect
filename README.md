@@ -326,7 +326,7 @@ project-root/
 ### Phase 5: Social Features
 
 * [ ] Comments
-* [ ] Post reactions
+* [x] Post likes
 * [ ] Follow users
 * [ ] Activity feed
 * [ ] Notifications
