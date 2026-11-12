@@ -47,7 +47,7 @@ export async function POST(req: Request) {
         // Get User ID From Verified JWT
         const userId = payload.userId;
 
-        // Validate Required Values
+        // Validate ID
         if (
             typeof postId !== "string" ||
             !mongoose.isObjectIdOrHexString(postId)
