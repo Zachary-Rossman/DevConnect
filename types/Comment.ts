@@ -12,4 +12,9 @@ export type Comment = {
     content: string;
     createdAt: string;
     updatedAt: string;
+
+    user?: {
+        _id: string;
+        username: string;
+    } | null;
 }

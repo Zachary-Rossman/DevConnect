@@ -214,7 +214,8 @@ project-root/
         └── LogoutConfirmation.tsx
     ├── comments/
         ├── CommentCard.tsx
-        └── CommentForm.tsx
+        ├── CommentForm.tsx
+        └── CommentList.tsx
     ├── layout/
         └── Hero.tsx
     ├── navigation/
