@@ -165,7 +165,7 @@ export async function GET(req: Request) {
             _id: {
                 $in: userIds,
             },
-        }).select("Username");
+        }).select("username");
 
         // Fast Lookup Table
         const userMap = new Map(

@@ -1,3 +1,4 @@
+import CommentList from "@/components/comments/CommentList";
 import { cookies } from "next/headers";
 import { getPost } from "@/lib/posts";
 import Link from "next/link";
@@ -118,6 +119,10 @@ export default async function PostPage({
                    postId={postId}
                    initialLiked={initialLiked}
                    initialCount={initialCount}
+                />
+
+                <CommentList
+                   postId={postId}
                 />
             </article>
         </main>
