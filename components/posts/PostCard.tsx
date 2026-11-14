@@ -50,7 +50,7 @@ export default function PostCard({
     );
 
     return (
-        <article className="overflow-hidden rounded-2xl border bg-white shadow-sm">
+        <article className="rounded-2xl border bg-white shadow-sm">
 
             {/* Author Information & Post Options */}
             <header className="flex items-start justify-between gap-4 p-6 pb-3">
