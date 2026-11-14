@@ -1,79 +1,140 @@
 "use client";
 
 import Link from "next/link";
+import PostOptions from "./PostOptions";
 import type { Post } from "@/types/Post";
 
+type PostCardProps = {
+    post?: Post;
+    loading?: boolean;
+    currentUserId?: string;
+};
 
 export default function PostCard({
     post,
     loading = false,
-}: {
-    post?: Post;
-    loading?: boolean;
-}) {
-    // Loading State (Skeleton UI)
+    currentUserId,
+}: PostCardProps) {
+    // Loading State
     if (loading) {
         return (
             <div
-                className="overflow-hidden rounded-2xl border bg-white shadow-sm animate-pulse"
+                className="animate-pulse rounded-2xl border bg-white p-6 shadow-sm"
                 aria-hidden="true"
             >
-                <div className="h-52 bg-gray-200" />
-
-                <div className="space-y-4 p-6">
-                    <div className="h-4 w-24 rounded bg-gray-200" />
-                    <div className="h-6 w-3/4 rounded bg-gray-200" />
-                    <div className="h-4 w-full rounded bg-gray-200" />
-                    <div className="h-4 w-5/6 rounded bg-gray-200" />
-                </div>
+                <div className="mb-6 h-8 w-36 rounded bg-gray-200" />
+                <div className="mb-3 h-6 w-3/4 rounded bg-gray-200" />
+                <div className="h-24 rounded bg-gray-200" />
             </div>
         );
     }
 
-    // Safety Check (If No Post Is Passed, Render Nothing)
+    // Safety Check
     if (!post) return null;
 
+    // Determine Post Ownership
+    const isOwner = Boolean(
+        currentUserId &&
+        post.authorId?._id === currentUserId
+    );
+
+    // Format Creation Date
+    const createdAt = new Date(post.createdAt).toLocaleDateString(
+        "en-US",
+        {
+            month: "short",
+            day: "numeric",
+            year: "numeric",
+            timeZone: "UTC",
+        }
+    );
+
     return (
-        <article>
-            {/* Link Wrapper */}
-            <Link
-                href={`/posts/${post._id}`}
-                aria-label={`Read post: ${post.title}`}
-                className="block overflow-hidden rounded-2xl border bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl focus:outline-none focus:ring-2  focus:ring-blue-600">
-                <div className="space-y-4 p-6">
-                    {/* Title */}
-                    <h2 className="text-2xl font-bold leading-tight text-gray-900">
-                        {post.title}
-                    </h2>
+        <article className="overflow-hidden rounded-2xl border bg-white shadow-sm">
 
-                    {/* Body Preview */}
-                    <p className="line-clamp-3 text-gray-600">
-                        {post.body}
-                    </p>
-
-                    {/* Image */}
-                    {post.image?.trim() && (
-                        <img
-                            src={post.image}
-                            alt={post.title}
-                            loading="lazy"
-                            className="w-full aspect-[16/9] object-cover"
-                        />
+            {/* Author Information & Post Options */}
+            <header className="flex items-start justify-between gap-4 p-6 pb-3">
+                <div className="space-y-1">
+                    {post.authorId?.username ? (
+                        <Link
+                            href={`/profile/${encodeURIComponent(post.authorId.username)}`}
+                            className="font-semibold text-gray-900 hover:text-blue-600"
+                        >
+                            @{post.authorId.username}
+                        </Link>
+                    ) : (
+                        <span className="font-semibold text-gray-900">
+                            Unknown User
+                        </span>
                     )}
 
-                    {/* Footer Section */}
-                    <div className="flex items-center justify-between pt-2 text-sm text-gray-500">
-                        <span>
-                            By <strong>{post.authorId?.username ?? "Unknown"}</strong>
-                        </span>
-
-                        {/* CTA */}
-                        <span className="font-medium text-blue-600">
-                            Read Post →
-                        </span>
-                    </div>
+                    <time
+                        dateTime={post.createdAt}
+                        className="block text-xs text-gray-500"
+                    >
+                        {createdAt}
+                    </time>
                 </div>
-            </Link>
+
+                {/* Owner Only Three-Dot Menu */}
+                {isOwner && (
+                    <details className="relative">
+                        <summary
+                            aria-label="Post options"
+                            className="cursor-pointer list-none rounded-lg px-3 py-1 text-xl hover:bg-gray-100"
+                        >
+                            ⋯
+                        </summary>
+
+                        <div className="absolute right-0 z-10 mt-2 w-48 rounded-xl border bg-white p-3 shadow-lg">
+                            <PostOptions postId={post._id} />
+                        </div>
+                    </details>
+                )}
+            </header>
+
+            {/* Post Content */}
+            <div className="space-y-3 px-6 pb-5">
+                <h2 className="text-xl font-bold text-gray-900">
+                    <Link
+                        href={`/posts/${post._id}`}
+                        className="hover:text-blue-600"
+                    >
+                        {post.title}
+                    </Link>
+                </h2>
+
+                <p className="line-clamp-5 whitespace-pre-wrap leading-7 text-gray-700">
+                    {post.body}
+                </p>
+
+                <Link
+                    href={`/posts/${post._id}`}
+                    className="inline-block text-sm font-medium text-blue-600 hover:underline"
+                >
+                    Read more
+                </Link>
+            </div>
+
+            {/* Optional Image */}
+            {post.image?.trim() && (
+                <img
+                    src={post.image}
+                    alt={`${post.title} featured image`}
+                    loading="lazy"
+                    className="max-h-96 w-full object-contain bg-gray-50"
+                />
+            )}
+
+            {/* Social Actions: Expand In Next Checkpoint */}
+            <footer className="flex items-center gap-4 border-t px-6 py-4">
+                <Link
+                    href={`/posts/${post._id}`}
+                    className="rounded-lg px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-100"
+                >
+                    💬 Comment
+                </Link>
+            </footer>
         </article>
-    )
+    );
 }
