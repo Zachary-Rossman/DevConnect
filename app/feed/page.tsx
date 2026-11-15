@@ -23,7 +23,10 @@ export default async function FeedPage() {
     // Render Page
     return (
         <main>
-            <PostList posts={posts}/>
+            <PostList 
+               posts={posts}
+               currentUserId={decoded.userId}
+            />
         </main>
     )
 }

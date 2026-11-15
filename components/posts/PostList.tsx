@@ -4,15 +4,19 @@ import { useMemo, useState } from "react";
 import PostCard from "./PostCard";
 import type { Post } from "@/types/Post";
 
+type PostListProps = {
+    posts?: Post[];
+    loading?: boolean;
+    currentUserId?: string;
+}
+
 export default function PostList({
     posts,
     loading = false,
-}: {
-    posts?: Post[];
-    loading?: boolean;
-}) {
+    currentUserId,
+}: PostListProps) {
     const [search, setSearch] = useState("");
-    
+
     // Filtering Logic
     const filteredPosts = useMemo(() => {
         if (!posts) return [];
@@ -36,7 +40,7 @@ export default function PostList({
     if (loading) {
         return (
             <section aria-busy="true" aria-live="polite" aria-label="Loading posts">
-                <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+                <div className="mx-auto flex w-full max-w-2xl flex-col gap-6">
                     {Array.from({ length: 6 }).map((_, i) => (
                         <PostCard key={i} loading />
                     ))}
@@ -61,7 +65,7 @@ export default function PostList({
     }
 
     return (
-        <section className="space-y-8" aria-label="Post list">
+        <section className="mx-auto w-full max-w-2xl space-y-8" aria-label="Post list">
             {/* Search + Filter Controls */}
             <div className="rounded-2xl border bg-white p-6 shadow-sm">
                 <div className="grid gap-6 md:grid-cols-[1fr_250px]">
@@ -95,7 +99,7 @@ export default function PostList({
             </div>
 
             {/* Post Grid */}
-            <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3" aria-live="polite">
+            <div className="mx-auto flex w-full max-w-2xl flex-col gap-6" aria-live="polite">
                 {noResults ? (
                     <div className="col-span-full rounded-2xl border bg-white p-12 text-center shadow-sm">
                         <h2 className="text-2xl font-bold">
@@ -111,6 +115,7 @@ export default function PostList({
                         <PostCard
                             key={post._id}
                             post={post}
+                            currentUserId={currentUserId}
                         />
                     ))
                 )}
