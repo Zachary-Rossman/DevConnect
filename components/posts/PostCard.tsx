@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import PostOptions from "./PostOptions";
+import PostReactionButton from "./PostReactionButton";
 import type { Post } from "@/types/Post";
 
 type PostCardProps = {
@@ -126,15 +127,46 @@ export default function PostCard({
                 />
             )}
 
-            {/* Social Actions: Expand In Next Checkpoint */}
-            <footer className="flex items-center gap-4 border-t px-6 py-4">
+            {/* Social Actions */}
+            <footer className="flex flex-wrap items-center gap-4 border-t px-6 py-4">
+                {/* Interactive Like Button */}
+                {post.likedByMe !== undefined && (
+                    <PostReactionButton
+                       postId={post._id}
+                       initialLiked={post.likedByMe ?? false}
+                       initialCount={post.likes} 
+                    />
+                )}
+
+                {/* Navigate To Full Comment Discussion */}
                 <Link
-                    href={`/posts/${post._id}`}
-                    className="rounded-lg px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-100"
+                   href={`/posts/${post._id}`}
+                   className="rounded-lg px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-100"
                 >
                     💬 Comment
+                    {post.latestComment !== undefined
+                        ? `(${post.comments})`
+                        : ""}
                 </Link>
             </footer>
+
+            {/* Latest Comment Preview */}
+            {post.latestComment && (
+                <div className="border-t bg-gray-50 px-6 py-4">
+                    <p className="line-clamp-2 text-sm text-gray-700">
+                        <span className="font-semibold text-gray-900">
+                            {post.latestComment.username}:{" "}
+                        </span>
+                    </p>
+
+                    <Link
+                       href={`/posts/${post._id}`}
+                       className="mt-2 inline-block text-xs font-medium text-blue-600 hover:underline"
+                    >
+                        View discussion
+                    </Link>
+                </div>
+            )}
         </article>
     );
 }

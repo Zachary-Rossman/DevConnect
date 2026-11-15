@@ -21,4 +21,11 @@ export type Post = {
     
     likes: number;
     comments: number;
+
+    likedByMe?: boolean;
+
+    latestComment?: {
+        username: string;
+        content: string;
+    } | null;
 }

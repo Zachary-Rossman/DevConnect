@@ -245,6 +245,7 @@ project-root/
  
 ├── lib/
     ├── auth.ts
+    ├── feed.ts
     ├── mongodb.ts
     └── posts.ts
 
@@ -320,7 +321,7 @@ project-root/
 * [x] Individual post pages
 * [x] Edit posts
 * [x] Delete posts
-* [ ] Feed system
+* [x] Feed system
 
 ---
 

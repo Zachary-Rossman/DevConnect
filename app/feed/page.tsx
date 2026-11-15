@@ -1,5 +1,5 @@
 import { cookies } from "next/headers";
-import { getPosts } from "@/lib/posts";
+import { getFeedPosts } from "@/lib/feed";
 import { notFound, redirect } from "next/navigation";
 import PostList from "@/components/posts/PostList";
 import { verifyToken } from "@/lib/auth";
@@ -18,11 +18,11 @@ export default async function FeedPage() {
     }
     
     // Fetch All Posts (Later To Be Followed Users)
-    const posts = await getPosts();
+    const posts = await getFeedPosts(decoded.userId);
 
     // Render Page
     return (
-        <main>
+        <main className="min-h-screen bg-gray-50 px-4 py-10">
             <PostList 
                posts={posts}
                currentUserId={decoded.userId}
