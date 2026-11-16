@@ -123,6 +123,12 @@ export default async function PostPage({
 
                 <CommentList
                    postId={postId}
+                   currentUserId={decoded?.userId}
+                   postOwnerId={
+                    post.authorId
+                        ? String(post.authorId._id)
+                        : undefined
+                   }
                 />
             </article>
         </main>

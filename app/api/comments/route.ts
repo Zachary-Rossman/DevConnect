@@ -1,3 +1,4 @@
+
 import Comment from "@/models/Comment";
 import { connectDB } from "@/lib/mongodb";
 import { cookies } from "next/headers";
@@ -7,6 +8,7 @@ import Post from "@/models/Post";
 import User from "@/models/User";
 import { verifyToken } from "@/lib/auth";
 
+// CREATE Comment
 export async function POST(req: Request) {
     try {
         // Connect To MongoDB
@@ -26,7 +28,7 @@ export async function POST(req: Request) {
             );
         }
 
-        //Read The Request Body Sent By Frontend
+        // Read Request Body
         const body = await req.json();
 
         // Validate Request Body Structure
@@ -41,13 +43,13 @@ export async function POST(req: Request) {
             );
         }
 
-        // Get Post ID From Request Body
+        // Extract Post ID
         const { postId } = body;
 
-        // Get User ID From Verified JWT
+        // Authenticated User ID
         const userId = payload.userId;
 
-        // Validate ID
+        // Validate Post ID
         if (
             typeof postId !== "string" ||
             !mongoose.isObjectIdOrHexString(postId)
@@ -70,13 +72,10 @@ export async function POST(req: Request) {
             );
         }
 
-        // Define Comment 
-        const {
-            content,
-            image,
-        } = body;
+        // Extract Comment Fields
+        const { content, image } = body;
 
-        // Verify Content Has Content
+        // Validate Comment Content
         if (
             typeof content !== "string" ||
             !content.trim()
@@ -98,6 +97,7 @@ export async function POST(req: Request) {
             );
         }
 
+        // Create Comment
         const comment = await Comment.create({
             postId,
             userId,
@@ -111,7 +111,6 @@ export async function POST(req: Request) {
     } catch (error) {
         console.error("POST /comments error:", error);
 
-        // Handle Invalid JSON Requests
         if (error instanceof SyntaxError) {
             return NextResponse.json(
                 { error: "Invalid JSON Body" },
@@ -119,7 +118,6 @@ export async function POST(req: Request) {
             );
         }
 
-        // Handle Unexpected Server Errors
         return NextResponse.json(
             { error: "Failed To Create Comment" },
             { status: 500 }
@@ -127,17 +125,17 @@ export async function POST(req: Request) {
     }
 }
 
+// READ Comments For A Post
 export async function GET(req: Request) {
     try {
-        //Connect To MongoDB
+        // Connect To MongoDB
         await connectDB();
 
-        // Read The PostID From The Query String
+        // Extract Post ID From URL
         const { searchParams } = new URL(req.url);
-
         const postId = searchParams.get("postId");
 
-        // Verify Post ID 
+        // Validate Post ID
         if (
             !postId ||
             !mongoose.isObjectIdOrHexString(postId)
@@ -148,26 +146,26 @@ export async function GET(req: Request) {
             );
         }
 
-        // Retrieve Every Comment For This Post
+        // Retrieve Comments (Newest First)
         const comments = await Comment.find({
             postId,
         }).sort({
             createdAt: -1,
         });
 
-        // Collect Every User ID
+        // Collect Comment Author IDs
         const userIds = comments.map(
             (comment) => comment.userId
         );
 
-        // Fetch Every Referenced User In One Database Query
+        // Fetch Referenced Users
         const users = await User.find({
             _id: {
                 $in: userIds,
             },
         }).select("username");
 
-        // Fast Lookup Table
+        // Create Username Lookup
         const userMap = new Map(
             users.map((user) => [
                 user._id.toString(),
@@ -175,7 +173,7 @@ export async function GET(req: Request) {
             ])
         );
 
-        // Merge Each Comment With Corresponding User
+        // Attach Author Information
         const enriched = comments.map((comment) => {
             const user = userMap.get(
                 comment.userId.toString()
@@ -183,21 +181,21 @@ export async function GET(req: Request) {
 
             return {
                 ...comment.toObject(),
+
                 user: user
-                   ? {
+                    ? {
                         _id: user._id.toString(),
-                        username: user.username,  
-                     }
-                   : null,
-          };
+                        username: user.username,
+                    }
+                    : null,
+            };
         });
 
-        // Return The Completed Comment List
+        // Return Comments
         return NextResponse.json(enriched);
     } catch (error) {
         console.error("GET /comments error:", error);
 
-        // Handle Unexpected Server Errors
         return NextResponse.json(
             { error: "Failed To Fetch Comments" },
             { status: 500 }

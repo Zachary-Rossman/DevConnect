@@ -154,6 +154,8 @@ project-root/
         └── page.tsx 
     ├── api/
         ├── comments/
+            ├── [id]/
+                └── route.ts
             └── route.ts
         ├── login/
             └── route.ts

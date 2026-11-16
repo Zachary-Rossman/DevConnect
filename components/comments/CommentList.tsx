@@ -7,9 +7,13 @@ import { useCallback, useEffect, useState } from "react";
 
 type CommentListProps = {
     postId: string;
+    currentUserId?: string;
+    postOwnerId?: string;
 }
 export default function CommentList({
     postId,
+    currentUserId,
+    postOwnerId,
 }: CommentListProps) {
     // Component State
     const [comments, setComments] = useState<Comment[]>([]);
@@ -75,6 +79,9 @@ export default function CommentList({
                         <CommentCard
                             key={comment._id}
                             comment={comment}
+                            currentUserId={currentUserId}
+                            postOwnerId={postOwnerId}
+                            onChanged={fetchComments}
                         />
                     ))
                 )}
