@@ -70,15 +70,6 @@ export default function Navbar() {
               </Link>
             </li>
 
-            <li>
-              <Link
-                 href="/posts"
-                 className={navLinkClasses("/posts")}
-              >
-                Discover
-              </Link>
-            </li>
-
             {/* Messages Only Visible For Authenticated Users */}
             {user && (
               <li>

@@ -190,9 +190,8 @@ project-root/
                 ├── loading.tsx
                 └── page.tsx
             └── page.tsx
-        ├── new/
+        └── new/
             └── page.tsx 
-        └── page.tsx
     ├── profile/
         ├──[username]/
             ├── edit/
