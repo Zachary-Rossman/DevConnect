@@ -1,4 +1,3 @@
-
 import Comment from "@/models/Comment";
 import { connectDB } from "@/lib/mongodb";
 import { cookies } from "next/headers";

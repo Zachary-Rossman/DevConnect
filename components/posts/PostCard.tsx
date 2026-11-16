@@ -153,10 +153,15 @@ export default function PostCard({
             {/* Latest Comment Preview */}
             {post.latestComment && (
                 <div className="border-t bg-gray-50 px-6 py-4">
+                    <span className="font-semibold text-gray-900">
+                        Comments
+                    </span>
+                    
                     <p className="line-clamp-2 text-sm text-gray-700">
                         <span className="font-semibold text-gray-900">
                             {post.latestComment.username}:{" "}
                         </span>
+                        {post.latestComment.content}
                     </p>
 
                     <Link
