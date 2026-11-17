@@ -38,7 +38,7 @@ export default function Navbar() {
         <div className="flex items-center gap-10">
           {/* Application Logo */}
           <Link
-             href="/"
+             href={user ? "/feed" : "/"}
              className="text-xl font-bold tracking-tight"
           >
             DevConnect
