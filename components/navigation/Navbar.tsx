@@ -20,8 +20,6 @@ export default function Navbar() {
         setMenuOpen(false);
     }, [pathname]);
 
-    const logoHref = user ? "/feed" : "/";
-
     // Keep the existing routes, only changing the visual presentation.
     const links: NavLink[] = user
         ? [
@@ -55,7 +53,7 @@ export default function Navbar() {
                 <div className="flex min-h-[76px] items-center justify-between gap-4">
                     {/* Brand: Feed for members, homepage for guests. */}
                     <Link
-                        href={logoHref}
+                        href="/"
                         className="inline-flex shrink-0 items-center gap-2.5 rounded-xl py-2 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#ffc3e5]"
                         aria-label="DevConnect"
                     >
