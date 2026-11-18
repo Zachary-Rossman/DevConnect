@@ -193,13 +193,12 @@ project-root/
         └── new/
             └── page.tsx 
     ├── profile/
-        ├──[username]/
+        └── [username]/
             ├── edit/
                 ├── error.tsx
                 ├── loading.tsx
                 └── page.tsx
             └── page.tsx 
-        └── page.tsx 
     ├── register/
         └── page.tsx 
     ├── favicon.ico

@@ -56,16 +56,16 @@ export default function CreatePostForm() {
                 body: JSON.stringify(newPost),
             });
 
-            const data = await response.json();
+            const data = await response.json().catch(() => null);
 
             // API-Level Errors
             if (!response.ok) {
-                setError(data?.error || "Failed to create post");
+                setError(data?.error || `Failed to create post (HTTP ${response.status})`);
                 return;
             }
 
             // Successful Creation
-            router.push("/posts");
+            router.push("/feed");
         } catch {
             // Network-Level Errors
             setError("Network error. Please try again.");
