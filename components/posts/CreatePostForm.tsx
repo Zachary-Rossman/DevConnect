@@ -74,11 +74,11 @@ export default function CreatePostForm() {
             setLoading(false);
         }
     }
-
+    
     return (
         <form
             onSubmit={handleSubmit}
-            className="space-y-5 max-w-md"
+            className="mx-auto w-full max-w-md space-y-6 text-[#172653]"
             aria-describedby={error ? "form-error" : undefined}
         >
             {/* Error Display */}
@@ -86,7 +86,7 @@ export default function CreatePostForm() {
                 <div
                     id="form-error"
                     role="alert"
-                    className="rounded-md border border-red-300 bg-red-50 px-4 py-3 text-red-700"
+                    className="rounded-xl border border-rose-300 bg-rose-50 px-4 py-3 text-sm font-medium leading-6 text-rose-800"
                 >
                     {error}
                 </div>
@@ -94,9 +94,9 @@ export default function CreatePostForm() {
 
             {/* Title Input */}
             <div
-                className="space-y-1"
+                className="space-y-2"
             >
-                <label htmlFor="title" className="text-sm font-medium">
+                <label htmlFor="title" className="text-sm font-bold text-[#243b73]">
                     Title
                 </label>
 
@@ -106,7 +106,7 @@ export default function CreatePostForm() {
                     value={title}
                     onChange={(e) => setTitle(e.target.value)}
                     placeholder="Enter a title"
-                    className="w-full rounded-md border px-3 py-2"
+                    className="min-h-12 w-full rounded-xl border border-[#c8d5ef] bg-white px-4 py-3 text-[#172653] shadow-sm outline-none transition-colors placeholder:text-[#7785a2] focus:border-[#a32972] focus:ring-2 focus:ring-[#f2b7df] disabled:cursor-not-allowed disabled:bg-[#f3f5fa] disabled:opacity-70"
                     disabled={loading}
                     aria-invalid={!!error}
                     autoComplete="off"
@@ -114,8 +114,8 @@ export default function CreatePostForm() {
             </div>
 
             {/* Optional Image URL */}
-            <div className="space-y-1">
-                <label htmlFor="image" className="text-sm font-medium">
+            <div className="space-y-2">
+                <label htmlFor="image" className="text-sm font-bold text-[#243b73]">
                     Image URL (optional)
                 </label>
 
@@ -125,15 +125,15 @@ export default function CreatePostForm() {
                     value={image}
                     onChange={(e) => setImage(e.target.value)}
                     placeholder="Enter URL for image"
-                    className="w-full rounded-md border px-3 py-2"
+                    className="min-h-12 w-full rounded-xl border border-[#c8d5ef] bg-white px-4 py-3 text-[#172653] shadow-sm outline-none transition-colors placeholder:text-[#7785a2] focus:border-[#a32972] focus:ring-2 focus:ring-[#f2b7df] disabled:cursor-not-allowed disabled:bg-[#f3f5fa] disabled:opacity-70"
                     disabled={loading}
                     autoComplete="off"
                 />
             </div>
 
             {/* Post Body */}
-            <div className="space-y-1">
-                <label htmlFor="body" className="text-sm font-medium">
+            <div className="space-y-2">
+                <label htmlFor="body" className="text-sm font-bold text-[#243b73]">
                     Body
                 </label>
 
@@ -143,7 +143,7 @@ export default function CreatePostForm() {
                     onChange={(e) => setBody(e.target.value)}
                     placeholder="What would you like to share?"
                     rows={10}
-                    className="w-full rounded-md border px-3 py-2"
+                    className="w-full rounded-xl border border-[#c8d5ef] bg-white px-4 py-3 text-[#172653] shadow-sm outline-none transition-colors placeholder:text-[#7785a2] focus:border-[#a32972] focus:ring-2 focus:ring-[#f2b7df] disabled:cursor-not-allowed disabled:bg-[#f3f5fa] disabled:opacity-70"
                     disabled={loading}
                     aria-invalid={!!error}
                     autoComplete="off"
@@ -154,7 +154,7 @@ export default function CreatePostForm() {
             <button
                 type="submit"
                 disabled={loading}
-                className="rounded-md bg-black px-4 py-2 text-white disabled:opacity-50"
+                className="inline-flex min-h-12 w-full items-center justify-center rounded-xl bg-[linear-gradient(110deg,#243f8f_0%,#59429c_55%,#923774_100%)] px-5 py-3 font-bold text-white shadow-[0_10px_26px_rgba(66,55,145,0.20)] transition-all hover:brightness-110 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#a32972] disabled:cursor-not-allowed disabled:opacity-50"
                 aria-busy={loading}
             >
                 {loading ? "Creating..." : "Create Post"}

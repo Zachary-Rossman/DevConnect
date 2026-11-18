@@ -74,73 +74,73 @@ export default function CommentForm({
             setLoading(false);
         }
     }
-
+    
     return (
         <form
-           onSubmit={handleSubmit}
-           className="rounded-2xl border bg-white p-6 shadow-sm space-y-4"
-           aria-describedby={error ? "comment-error" : undefined}
+            onSubmit={handleSubmit}
+            className="space-y-5 rounded-2xl border border-[#dce2f7] bg-white p-5 shadow-[0_10px_30px_rgba(35,50,104,0.06)] sm:p-6"
+            aria-describedby={error ? "comment-error" : undefined}
         >
             {/* Error Message */}
             {error && (
                 <div
-                   id="comment-error"
-                   role="alert"
-                   aria-live="polite"
-                   className="rounded-lg border border-red-200 bg-red-50 p-3 text-sm text-red-700"
+                    id="comment-error"
+                    role="alert"
+                    aria-live="polite"
+                    className="rounded-xl border border-rose-300 bg-rose-50 px-4 py-3 text-sm font-medium leading-6 text-rose-800"
                 >
                     {error}
                 </div>
             )}
 
             {/* Comment Field */}
-            <div className="space-y-1">
+            <div className="space-y-2">
                 <label
-                   htmlFor="comment"
-                   className="text-sm font-medium text-gray-700"
+                    htmlFor="comment"
+                    className="text-sm font-bold text-[#243b73]"
                 >
                     Comment
                 </label>
 
                 <textarea
-                   id="comment"
-                   value={content}
-                   onChange={(e) => setContent(e.target.value)}
-                   rows={4}
-                   disabled={loading}
-                   className="w-full rounded-lg border px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                   placeholder="Write your comment..."
+                    id="comment"
+                    value={content}
+                    onChange={(e) => setContent(e.target.value)}
+                    rows={4}
+                    disabled={loading}
+                    className="w-full rounded-xl border border-[#c8d5ef] bg-[#fcfdff] px-4 py-3 text-[#172653] shadow-sm outline-none transition-colors placeholder:text-[#7785a2] focus:border-[#a32972] focus:ring-2 focus:ring-[#f2b7df] disabled:cursor-not-allowed disabled:bg-[#f3f5fa] disabled:opacity-70"
+                    placeholder="Write your comment..."
                 />
             </div>
 
             {/* Optional Image */}
-            <div className="space-y-1">
+            <div className="space-y-2">
                 <label
-                   htmlFor="image"
-                   className="text-sm font-medium text-gray-700"
+                    htmlFor="image"
+                    className="text-sm font-bold text-[#243b73]"
                 >
                     URL For Image (optional)
                 </label>
 
                 <input
-                   id="image"
-                   value={image}
-                   onChange={(e) => setImage(e.target.value)}
-                   disabled={loading}
-                   className="w-full rounded-lg border px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                   placeholder="https://..."
+                    id="image"
+                    value={image}
+                    onChange={(e) => setImage(e.target.value)}
+                    disabled={loading}
+                    className="min-h-12 w-full rounded-xl border border-[#c8d5ef] bg-[#fcfdff] px-4 py-3 text-[#172653] shadow-sm outline-none transition-colors placeholder:text-[#7785a2] focus:border-[#a32972] focus:ring-2 focus:ring-[#f2b7df] disabled:cursor-not-allowed disabled:bg-[#f3f5fa] disabled:opacity-70"
+                    placeholder="https://..."
                 />
 
                 {/* Submit Button */}
                 <button
-                   type="submit"
-                   disabled={loading}
-                   aria-busy={loading}
-                   className="rounded-lg bg-blue-600 px-5 py-2 text-white transition hover:bg-blue-700 disabled:opacity-50"
+                    type="submit"
+                    disabled={loading}
+                    aria-busy={loading}
+                    className="mt-4 inline-flex min-h-12 items-center justify-center rounded-xl bg-[linear-gradient(110deg,#243f8f_0%,#59429c_55%,#923774_100%)] px-6 py-3 font-bold text-white shadow-[0_8px_22px_rgba(66,55,145,0.15)] transition-all hover:brightness-110 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#a32972] disabled:cursor-not-allowed disabled:opacity-50"
                 >
                     {loading ? "Posting..." : "Post Comment"}
                 </button>
             </div>
         </form>
-    )
+    );
 }

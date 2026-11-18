@@ -58,7 +58,7 @@ export default function CommentList({
     
     // Render Component
     return (
-        <section className="space-y-6">
+        <section className="space-y-8">
 
             {/* Have Form To Leave Comment */}
             <CommentForm
@@ -67,13 +67,22 @@ export default function CommentList({
             />
 
             {/* Display Comments */}
-            <div className="space-y-4">
+            <div className="space-y-5">
                 {loading ? (
-                    <p>Loading comments...</p>
+                    <p className="rounded-2xl border border-[#dce2f7] bg-white px-6 py-5 text-sm font-medium text-[#536382] shadow-[0_10px_30px_rgba(35,50,104,0.06)]">
+                        Loading comments...
+                    </p>
                 ) : error ? (
-                    <p role="alert">{error}</p>
+                    <p
+                        role="alert"
+                        className="rounded-2xl border border-rose-300 bg-rose-50 px-6 py-5 text-sm font-medium text-rose-800 shadow-sm"
+                    >
+                        {error}
+                    </p>
                 ) : comments.length === 0 ? (
-                    <p>No comments yet. Be the first to comment!</p>
+                    <p className="rounded-2xl border border-[#e5d5f5] bg-[linear-gradient(135deg,#edf3ff_0%,#fff1fa_100%)] px-6 py-8 text-center font-medium text-[#536382] shadow-sm">
+                        No comments yet. Be the first to comment!
+                    </p>
                 ) : (
                     comments.map((comment) => (
                         <CommentCard

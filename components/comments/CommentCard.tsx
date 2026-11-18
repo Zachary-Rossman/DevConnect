@@ -152,17 +152,17 @@ export default function CommentCard({
     );
 
     return (
-        <section className="space-y-4 rounded-2xl border bg-white p-6 shadow-sm">
+        <section className="space-y-5 rounded-2xl border border-[#dce2f7] bg-white p-5 shadow-[0_10px_30px_rgba(35,50,104,0.06)] transition-colors hover:border-[#e5b5df] sm:p-6">
 
             {/* Author & Date */}
-            <header className="flex items-center justify-between gap-4">
-                <span className="font-semibold text-gray-900">
+            <header className="flex flex-wrap items-center justify-between gap-3 border-b border-[#e8e8f5] pb-4">
+                <span className="break-words font-bold text-[#243f8f]">
                     {comment.user?.username ?? "Unknown User"}
                 </span>
 
                 <time
                     dateTime={comment.createdAt}
-                    className="text-sm text-gray-500"
+                    className="text-sm font-medium text-[#66738f]"
                 >
                     {new Date(comment.createdAt).toLocaleDateString(
                         "en-US",
@@ -178,10 +178,10 @@ export default function CommentCard({
 
             {/* Editing Form Or Comment Content */}
             {editing ? (
-                <div className="space-y-3">
+                <div className="space-y-4">
                     <label
                         htmlFor={`edit-${comment._id}`}
-                        className="block text-sm font-medium"
+                        className="block text-sm font-bold text-[#243b73]"
                     >
                         Edit Comment
                     </label>
@@ -194,7 +194,7 @@ export default function CommentCard({
                         }
                         rows={3}
                         disabled={busy}
-                        className="w-full rounded-lg border p-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        className="w-full rounded-xl border border-[#c8d5ef] bg-[#fcfdff] p-4 text-[#172653] shadow-sm outline-none transition-colors focus:border-[#a32972] focus:ring-2 focus:ring-[#f2b7df] disabled:cursor-not-allowed disabled:bg-[#f3f5fa] disabled:opacity-70"
                     />
 
                     <input
@@ -206,15 +206,15 @@ export default function CommentCard({
                             setDraftImage(e.target.value)
                         }
                         disabled={busy}
-                        className="w-full rounded-lg border p-3"
+                        className="w-full rounded-xl border border-[#c8d5ef] bg-[#fcfdff] p-3 text-[#172653] shadow-sm outline-none transition-colors placeholder:text-[#7785a2] focus:border-[#a32972] focus:ring-2 focus:ring-[#f2b7df] disabled:cursor-not-allowed disabled:bg-[#f3f5fa] disabled:opacity-70"
                     />
 
-                    <div className="flex gap-2">
+                    <div className="flex flex-wrap gap-3">
                         <button
                             type="button"
                             onClick={() => void handleSave()}
                             disabled={busy}
-                            className="rounded-lg bg-blue-600 px-4 py-2 text-white disabled:opacity-50"
+                            className="inline-flex min-h-11 items-center justify-center rounded-xl bg-[linear-gradient(110deg,#243f8f_0%,#59429c_55%,#923774_100%)] px-5 py-2 font-bold text-white shadow-[0_8px_22px_rgba(66,55,145,0.15)] transition-all hover:brightness-110 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#a32972] disabled:cursor-not-allowed disabled:opacity-50"
                         >
                             {busy ? "Saving..." : "Save"}
                         </button>
@@ -226,7 +226,7 @@ export default function CommentCard({
                                 setError("");
                             }}
                             disabled={busy}
-                            className="rounded-lg border px-4 py-2"
+                            className="inline-flex min-h-11 items-center justify-center rounded-xl border border-[#a8bff1] bg-white px-5 py-2 font-bold text-[#243f8f] transition-colors hover:bg-[#edf3ff] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#a32972] disabled:cursor-not-allowed disabled:opacity-50"
                         >
                             Cancel
                         </button>
@@ -235,7 +235,7 @@ export default function CommentCard({
             ) : (
                 <>
                     {/* Comment Content */}
-                    <p className="whitespace-pre-wrap text-gray-700">
+                    <p className="whitespace-pre-wrap break-words leading-7 text-[#465577]">
                         {comment.content}
                     </p>
 
@@ -245,7 +245,7 @@ export default function CommentCard({
                             src={comment.image}
                             alt="Image attached to comment"
                             loading="lazy"
-                            className="max-h-80 w-full rounded-xl object-contain"
+                            className="max-h-80 w-full rounded-xl border border-[#dce3f7] bg-[#f3f5ff] object-contain shadow-sm"
                         />
                     )}
                 </>
@@ -253,21 +253,21 @@ export default function CommentCard({
 
             {/* Errors */}
             {error && (
-                <p role="alert" className="text-sm text-red-600">
+                <p role="alert" className="rounded-xl border border-rose-300 bg-rose-50 px-4 py-3 text-sm font-medium text-rose-800">
                     {error}
                 </p>
             )}
 
             {/* Ownership Controls */}
             {!editing && (isCommentAuthor || canDelete) && (
-                <div className="flex items-center gap-3 border-t pt-3">
+                <div className="flex flex-wrap items-center gap-3 border-t border-[#e8e8f5] pt-4">
 
                     {isCommentAuthor && (
                         <button
                             type="button"
                             onClick={startEditing}
                             disabled={busy}
-                            className="text-sm font-medium text-blue-600 hover:underline"
+                            className="inline-flex min-h-10 items-center justify-center rounded-lg border border-[#b9cafa] bg-[#edf3ff] px-4 py-2 text-sm font-bold text-[#243f8f] transition-colors hover:bg-[#dce8ff] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#a32972] disabled:cursor-not-allowed disabled:opacity-50"
                         >
                             Edit
                         </button>
@@ -278,7 +278,7 @@ export default function CommentCard({
                             type="button"
                             onClick={() => void handleDelete()}
                             disabled={busy}
-                            className="text-sm font-medium text-red-600 hover:underline disabled:opacity-50"
+                            className="inline-flex min-h-10 items-center justify-center rounded-lg border border-rose-200 bg-rose-50 px-4 py-2 text-sm font-bold text-rose-700 transition-colors hover:bg-rose-100 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#be123c] disabled:cursor-not-allowed disabled:opacity-50"
                         >
                             {busy ? "Deleting..." : "Delete"}
                         </button>
