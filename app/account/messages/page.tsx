@@ -31,7 +31,7 @@ export default function MessagesPage() {
                     aria-live="polite"
                 >
                     <p className="text-gray-500">
-                        Loading Dashboard...
+                        Loading Messages...
                     </p>
                 </main>
             );
