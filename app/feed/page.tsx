@@ -22,11 +22,11 @@ export default async function FeedPage() {
 
     // Render Page
     return (
-        <main className="min-h-screen bg-gray-50 px-4 py-10">
-            <PostList 
-               posts={posts}
-               currentUserId={decoded.userId}
+        <main className="min-h-screen bg-[linear-gradient(180deg,#edf3ff_0%,#fff1fa_50%,#eef2ff_100%)] px-4 py-10 text-[#172653] sm:px-6 sm:py-14">
+            <PostList
+                posts={posts}
+                currentUserId={decoded.userId}
             />
         </main>
-    )
+    );
 }
