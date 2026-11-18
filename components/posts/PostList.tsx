@@ -65,13 +65,13 @@ export default function PostList({
     }
 
     return (
-        <section className="mx-auto w-full max-w-2xl space-y-8" aria-label="Post list">
+        <section className="mx-auto w-full max-w-2xl space-y-8 text-[#172653]" aria-label="Post list">
             {/* Search + Filter Controls */}
-            <div className="rounded-2xl border bg-white p-6 shadow-sm">
+            <div className="rounded-3xl border border-[#dce2f7] bg-white/95 p-5 shadow-[0_12px_35px_rgba(35,50,104,0.07)] sm:p-6">
                 <div className="grid gap-6 md:grid-cols-[1fr_250px]">
                     {/* Search Input */}
                     <div>
-                        <label htmlFor="search" className="mb-2 block text-sm font-semibold text-gray-700">
+                        <label htmlFor="search" className="mb-2 block text-sm font-bold text-[#243b73]">
                             Search Posts
                         </label>
 
@@ -82,17 +82,19 @@ export default function PostList({
                             onChange={(e) => setSearch(e.target.value)}
                             placeholder="Search by title or content..."
                             autoComplete="off"
-                            className="w-full rounded-xl border px-4 py-3 outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-500"
+                            className="min-h-12 w-full rounded-xl border border-[#c8d5ef] bg-[#fcfdff] px-4 py-3 text-[#172653] shadow-sm outline-none transition-colors placeholder:text-[#7785a2] focus:border-[#a32972] focus:ring-2 focus:ring-[#f2b7df]"
                         />
                     </div>
                 </div>
             </div>
 
             {/* Results Header */}
-            <div className="flex items-center justify-between">
-                <h2 className="text-2xl font-bold">Posts</h2>
+            <div className="flex flex-wrap items-center justify-between gap-3 border-b border-[#dce2f7] pb-4">
+                <h2 className="text-2xl font-black tracking-tight text-[#172653]">
+                    Posts
+                </h2>
 
-                <p className="text-sm text-gray-500" aria-live="polite">
+                <p className="rounded-full border border-[#e5d5f5] bg-[#fff1fa] px-4 py-2 text-sm font-semibold text-[#923774]" aria-live="polite">
                     {filteredPosts.length} result
                     {filteredPosts.length !== 1 ? "s" : ""}
                 </p>
@@ -101,12 +103,12 @@ export default function PostList({
             {/* Post Grid */}
             <div className="mx-auto flex w-full max-w-2xl flex-col gap-6" aria-live="polite">
                 {noResults ? (
-                    <div className="col-span-full rounded-2xl border bg-white p-12 text-center shadow-sm">
-                        <h2 className="text-2xl font-bold">
+                    <div className="col-span-full rounded-3xl border border-[#e5d5f5] bg-[linear-gradient(135deg,#ffffff_0%,#fff1fa_100%)] p-8 text-center shadow-[0_12px_35px_rgba(35,50,104,0.07)] sm:p-12">
+                        <h2 className="text-2xl font-black tracking-tight text-[#172653]">
                             Nothing matched your search
                         </h2>
 
-                        <p className="mt-3 text-gray-500">
+                        <p className="mt-3 leading-7 text-[#536382]">
                             Try another keyword
                         </p>
                     </div>

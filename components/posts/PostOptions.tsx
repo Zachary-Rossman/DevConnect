@@ -53,27 +53,27 @@ export default function PostOptions({ postId }: PostOptionsProps) {
         <div className="flex flex-wrap items-center gap-2">
             {/* Edit Post Button */}
             <button
-               type="button"
-               onClick={() => router.push(`/posts/${postId}/edit`)}
-               disabled={deleting}
-               className="rounded-lg border px-4 py-2 hover:bg-gray-100 disabled:opacity-50"
+                type="button"
+                onClick={() => router.push(`/posts/${postId}/edit`)}
+                disabled={deleting}
+                className="inline-flex min-h-10 items-center justify-center rounded-xl border border-[#b9cafa] bg-[#edf3ff] px-4 py-2 text-sm font-bold text-[#243f8f] transition-colors hover:bg-[#dce8ff] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#a32972] disabled:cursor-not-allowed disabled:opacity-50"
             >
                 Edit
             </button>
 
             {/* Delete Post Button */}
             <button
-               type="button"
-               onClick={handleDelete}
-               disabled={deleting}
-               className="rounded-lg bg-red-600 px-4 py-2 text-white hover:bg-red-700 disabled:opacity-50"
+                type="button"
+                onClick={handleDelete}
+                disabled={deleting}
+                className="inline-flex min-h-10 items-center justify-center rounded-xl border border-rose-200 bg-rose-50 px-4 py-2 text-sm font-bold text-rose-700 transition-colors hover:bg-rose-100 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#be123c] disabled:cursor-not-allowed disabled:opacity-50"
             >
                 {deleting ? "Deleting..." : "Delete"}
             </button>
 
             {/* Display Deletion Error */}
             {error && (
-                <p role="alert" className="w-full text-sm text-red-600">
+                <p role="alert" className="w-full rounded-xl border border-rose-300 bg-rose-50 px-4 py-3 text-sm font-medium leading-6 text-rose-800">
                     {error}
                 </p>
             )}

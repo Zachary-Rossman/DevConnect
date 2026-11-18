@@ -67,26 +67,26 @@ export default function PostReactionButton({
 
     return (
         <button
-           type="button"
-           onClick={handleReaction}
-           disabled={loading || authLoading}
-           aria-pressed={liked}
-           aria-label={
-            liked 
-                ? "Remove like from this post" 
-                : "Like this post"
-           }
-           className={`inline-flex items-center gap-2 rounded-lg border px-4 py-2 text-sm font-medium transition focus:outline-none focus:ring-2 disabled:cursor-not-allowed disabled:opacity-50
+            type="button"
+            onClick={handleReaction}
+            disabled={loading || authLoading}
+            aria-pressed={liked}
+            aria-label={
+                liked
+                    ? "Remove like from this post"
+                    : "Like this post"
+            }
+            className={`inline-flex min-h-10 items-center justify-center gap-2 rounded-xl border px-4 py-2 text-sm font-bold transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#a32972] disabled:cursor-not-allowed disabled:opacity-50
                 ${
-                   liked
-                      ? "border-blue-600 bg-blue-600 text-white hover:bg-blue-700"
-                      : "border-gray-300 bg-white text-gray-700 hover:bg-gray-100"
+                    liked
+                        ? "border-[#923774] bg-[#923774] text-white hover:bg-[#762a5e]"
+                        : "border-[#b9cafa] bg-[#edf3ff] text-[#243f8f] hover:bg-[#dce8ff]"
                 }
-           `}
+            `}
         >
             {/* Loading State */}
             {loading ? (
-                <span className="h-4 w-4 animate-spin rounded-full border-2 border-current border-t-transparent" />
+                <span className="h-4 w-4 animate-spin rounded-full border-2 border-current border-t-transparent motion-reduce:animate-none" />
             ) : (
                 <span aria-hidden="true">
                     👍
