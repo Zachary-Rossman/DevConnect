@@ -51,39 +51,40 @@ export default async function EditPostPage({ params }: Props) {
     }
 
     // Render Edit Page
-    return (
+    
+        return (
             <main
-               className="min-h-[calc(100vh-4rem)] bg-gray-50 px-6 py-12"
-               aria-labelledby="edit-post-heading"
+                className="flex min-h-[calc(100vh-4rem)] items-center justify-center bg-[linear-gradient(135deg,#09183f_0%,#243d87_52%,#783b87_100%)] px-4 py-12 sm:px-6 sm:py-16"
+                aria-labelledby="edit-post-heading"
             >
-                <div className="space-y-2 text-center">
+                <div className="w-full max-w-3xl space-y-8 rounded-3xl border border-[#b8c6ff]/30 bg-white/95 p-6 shadow-[0_25px_70px_rgba(6,17,55,0.30)] sm:p-10">
                     {/* Page Header */}
-                    <header className="space-y-2 text-center">
+                    <header className="space-y-3 text-center">
                         <h1
-                           id="edit-post-heading"
-                           className="text-4xl font-bold tracking-tight text-gray-900"
+                            id="edit-post-heading"
+                            className="bg-[linear-gradient(90deg,#172653_0%,#354b97_45%,#a32972_100%)] bg-clip-text text-4xl font-black tracking-tight text-transparent sm:text-5xl"
                         >
                             Edit Post
                         </h1>
 
-                        <p className="text-gray-600">
+                        <p className="text-base leading-7 text-[#536382]">
                             Update your post and save your changes.
                         </p>
                     </header>
 
                     {/* Edit Form */}
                     <section
-                       className="rounded-2xl border bg-white p-6 shadow-sm"
-                       aria-label="Edit post form" 
+                        className="rounded-2xl border border-[#eed7ec] bg-[linear-gradient(145deg,#ffffff_0%,#fff4fb_100%)] p-6 shadow-[0_8px_30px_rgba(35,50,104,0.05)] sm:p-8"
+                        aria-label="Edit post form"
                     >
                         <EditPostForm
-                           id={post._id.toString()}
-                           initialTitle={post.title}
-                           initialBody={post.body}
-                           initialImage={post.image ?? ""}
+                            id={post._id.toString()}
+                            initialTitle={post.title}
+                            initialBody={post.body}
+                            initialImage={post.image ?? ""}
                         />
                     </section>
                 </div>
             </main>
-        )
+        );
 }

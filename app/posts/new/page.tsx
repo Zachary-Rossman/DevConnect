@@ -32,35 +32,35 @@ export default async function NewPostPage() {
         redirect("/login");
     }
 
-    // Success Path
+    // Render Page
     return(
         <main
-            className="min-h-[calc(100vh-4rem)] bg-gray-50 px-6 py-12"
+            className="flex min-h-[calc(100vh-4rem)] items-center justify-center bg-[linear-gradient(135deg,#09183f_0%,#243d87_52%,#783b87_100%)] px-4 py-12 sm:px-6 sm:py-16"
             aria-labelledby="create-post-title"
         >
-            <div className="max-w-2xl mx-auto space-y-8">
+            <div className="mx-auto w-full max-w-2xl space-y-8 rounded-3xl border border-[#b8c6ff]/30 bg-white/95 p-6 shadow-[0_25px_70px_rgba(6,17,55,0.30)] sm:p-10">
                 {/* Page Header */}
-                <header className="space-y-2 text-center">
+                <header className="space-y-3 text-center">
                     <h1
                         id="create-post-title"
-                        className="text-4xl font-bold tracking-tight text-gray-900"
+                        className="bg-[linear-gradient(90deg,#172653_0%,#354b97_45%,#a32972_100%)] bg-clip-text text-4xl font-black tracking-tight text-transparent sm:text-5xl"
                     >
                         Create New Post
                     </h1>
 
-                    <p className="text-gray-600">
+                    <p className="text-base leading-7 text-[#536382]">
                         Share your thoughts and ideas with the community.
                     </p>
                 </header>
 
                 {/* Form Container */}
                 <section
-                    className="bg-white border rounded-2xl shadow-sm p-6"
+                    className="rounded-2xl border border-[#eed7ec] bg-[linear-gradient(145deg,#ffffff_0%,#fff4fb_100%)] p-6 shadow-[0_8px_30px_rgba(35,50,104,0.05)] sm:p-8"
                     aria-label="Create Post Form"
                 >
                     <CreatePostForm />
                 </section>
             </div>
         </main>
-    )
+    );
 }
