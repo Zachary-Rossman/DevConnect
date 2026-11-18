@@ -69,12 +69,14 @@ export default async function EditProfilePage({
 
     // Render Protected Edit Page
     return (
-        <main className="mx-auto max-w-5xl px-4 py-8">
-            <h1 className="text-2xl font-bold text-gray-900">
-                Edit Profile
-            </h1>
+        <main className="flex min-h-[calc(100vh-4rem)] items-center justify-center bg-[linear-gradient(135deg,#09183f_0%,#243d87_52%,#783b87_100%)] px-4 py-12 sm:px-6 sm:py-16">
+            <div className="mx-auto w-full max-w-5xl space-y-8 rounded-3xl border border-[#b8c6ff]/30 bg-white/95 p-6 shadow-[0_25px_70px_rgba(6,17,55,0.30)] sm:p-10">
+                <h1 className="bg-[linear-gradient(90deg,#172653_0%,#354b97_45%,#a32972_100%)] bg-clip-text text-3xl font-black tracking-tight text-transparent sm:text-4xl">
+                    Edit Profile
+                </h1>
 
-            <EditProfileForm profile={profile} />
+                <EditProfileForm profile={profile} />
+            </div>
         </main>
     );
 }

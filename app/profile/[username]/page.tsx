@@ -90,16 +90,18 @@ export default async function ProfileIndividualPage({
         decoded && String(decoded.userId) === String(user._id)
     );
 
-    // Pass Profile Data Into UserInfo
+    // Render Page
     return (
-        <main className="mx-auto max-w-5xl space-y-6 px-4 py-8">
-            {isOwner && (
-                <ProfileActions username={profile.username} />
-            )}
-            <UserInfo profile={profile} />
-            <Bio bio={profile.bio} />
-            <TechStack techStack={profile.techStack} />
-            <PostFeedProfile posts={posts} />
+        <main className="min-h-screen bg-[linear-gradient(180deg,#edf3ff_0%,#fff1fa_50%,#eef2ff_100%)] px-4 py-10 text-[#172653] sm:px-6 sm:py-14">
+            <div className="mx-auto max-w-5xl space-y-8">
+                {isOwner && (
+                    <ProfileActions username={profile.username} />
+                )}
+                <UserInfo profile={profile} />
+                <Bio bio={profile.bio} />
+                <TechStack techStack={profile.techStack} />
+                <PostFeedProfile posts={posts} />
+            </div>
         </main>
     );
 }

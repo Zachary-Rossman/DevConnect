@@ -30,10 +30,10 @@ export default function RootLayout({
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">
+      <body className="flex min-h-full flex-col bg-[linear-gradient(180deg,#edf3ff_0%,#fff1fa_55%,#eef2ff_100%)] font-sans text-[#172653] selection:bg-[#ffc3e5] selection:text-[#172653]">
         <AuthProvider>
           <Navbar />
-          <main>
+          <main className="flex-1">
             {children}
           </main>
         </AuthProvider>
