@@ -72,11 +72,11 @@ export default function LoginForm() {
             setLoading(false);
         }
     }
-
-    return (
+    
+  return (
     <form
       onSubmit={handleSubmit}
-      className="space-y-5 max-w-md"
+      className="mx-auto w-full max-w-md space-y-6 text-[#172653]"
       aria-describedby={error ? "login-error" : undefined}
     >
       {/* ERROR MESSAGE */}
@@ -86,7 +86,7 @@ export default function LoginForm() {
           id="login-error"
           role="alert"
           aria-live="polite"
-          className="rounded-md border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-600"
+          className="rounded-xl border border-rose-300 bg-rose-50 px-4 py-3 text-sm font-medium leading-6 text-rose-800"
         >
           {error}
         </div>
@@ -94,8 +94,8 @@ export default function LoginForm() {
 
       {/* USERNAME FIELD */}
 
-      <div className="space-y-1">
-        <label htmlFor="username" className="text-sm font-medium">
+      <div className="space-y-2">
+        <label htmlFor="username" className="text-sm font-bold text-[#243b73]">
           Username
         </label>
 
@@ -105,7 +105,7 @@ export default function LoginForm() {
           value={username}
           onChange={(e) => setUsername(e.target.value)}
           placeholder="Enter your username"
-          className="w-full rounded-md border px-3 py-2"
+          className="min-h-12 w-full rounded-xl border border-[#c8d5ef] bg-white px-4 py-3 text-[#172653] shadow-sm outline-none transition-colors placeholder:text-[#7785a2] focus:border-[#a32972] focus:ring-2 focus:ring-[#f2b7df] disabled:cursor-not-allowed disabled:bg-[#f3f5fa] disabled:opacity-70"
           disabled={loading}
           autoComplete="username"
           aria-invalid={!!error}
@@ -114,8 +114,8 @@ export default function LoginForm() {
 
       {/* PASSWORD FIELD */}
 
-      <div className="space-y-1">
-        <label htmlFor="password" className="text-sm font-medium">
+      <div className="space-y-2">
+        <label htmlFor="password" className="text-sm font-bold text-[#243b73]">
           Password
         </label>
 
@@ -125,7 +125,7 @@ export default function LoginForm() {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           placeholder="Enter your password"
-          className="w-full rounded-md border px-3 py-2"
+          className="min-h-12 w-full rounded-xl border border-[#c8d5ef] bg-white px-4 py-3 text-[#172653] shadow-sm outline-none transition-colors placeholder:text-[#7785a2] focus:border-[#a32972] focus:ring-2 focus:ring-[#f2b7df] disabled:cursor-not-allowed disabled:bg-[#f3f5fa] disabled:opacity-70"
           disabled={loading}
           autoComplete="current-password"
           aria-invalid={!!error}
@@ -138,7 +138,7 @@ export default function LoginForm() {
         type="submit"
         disabled={loading}
         aria-busy={loading}
-        className="w-full rounded-md bg-black px-4 py-2 text-white disabled:opacity-50"
+        className="min-h-12 w-full rounded-xl bg-[linear-gradient(110deg,#243f8f_0%,#59429c_55%,#923774_100%)] px-5 py-3 font-bold text-white shadow-[0_10px_26px_rgba(66,55,145,0.20)] transition-all hover:brightness-110 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#a32972] disabled:cursor-not-allowed disabled:opacity-50"
       >
         {loading ? "Logging in..." : "Login"}
       </button>

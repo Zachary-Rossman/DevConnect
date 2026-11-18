@@ -49,51 +49,51 @@ export default function LogoutConfirmation() {
 
     return (
         <main
-           className="min-h-[calc(100vh-4rem)] flex items-center justify-center px-6 py-12 bg-gray-50"
-           aria-labelledby="logout-title"
+            className="flex min-h-[calc(100vh-4rem)] items-center justify-center bg-[linear-gradient(135deg,#09183f_0%,#243d87_52%,#783b87_100%)] px-4 py-12 sm:px-6 sm:py-16"
+            aria-labelledby="logout-title"
         >
             {/* Centered Container */}
-            <div className="w-full max-w-md space-y-6">
+            <div className="w-full max-w-md space-y-6 rounded-3xl border border-[#b8c6ff]/30 bg-white/95 p-6 shadow-[0_25px_70px_rgba(6,17,55,0.30)] sm:p-10">
                 {/* Header Section */}
-                <header className="text-center space-y-2">
+                <header className="space-y-3 text-center">
                     <h1
-                       id="logout-title"
-                       className="text-3xl font-bold tracking-tight text-gray-900"
+                        id="logout-title"
+                        className="bg-[linear-gradient(90deg,#172653_0%,#354b97_45%,#a32972_100%)] bg-clip-text text-3xl font-black tracking-tight text-transparent sm:text-4xl"
                     >
                         Are you sure you want to logout?
                     </h1>
 
-                    <p className="text-sm text-gray-600">
+                    <p className="text-sm leading-7 text-[#536382]">
                         You will need to log in again to access your account.
                     </p>
                 </header>
 
                 {/* Logout Confirmation Container */}
-                <section className="bg-white border rounded-xl shadow-sm p-6 space-y-4">
+                <section className="space-y-5 rounded-2xl border border-[#eed7ec] bg-[linear-gradient(145deg,#ffffff_0%,#fff4fb_100%)] p-6 shadow-[0_8px_30px_rgba(35,50,104,0.05)]">
                     {/* Error Message */}
                     {error && (
                         <p
-                           role="alert"
-                           className="text-sm text-red-600 text-center"
+                            role="alert"
+                            className="rounded-xl border border-rose-300 bg-rose-50 px-4 py-3 text-center text-sm font-medium text-rose-800"
                         >
                             {error}
                         </p>
                     )}
 
                     {/* Confirmation Buttons */}
-                    <div className="flex items-center justify-center gap-4">
+                    <div className="flex flex-wrap items-center justify-center gap-4">
                         <button
-                           type="button"
-                           onClick={handleLogout}
-                           disabled={loading}
-                           className="rounded-lg bg-red-600 px-5 py-2 text-white transition hover:bg-red-700 disabled:opacity-50 disabled:cursor-not-allowed"
+                            type="button"
+                            onClick={handleLogout}
+                            disabled={loading}
+                            className="inline-flex min-h-12 items-center justify-center rounded-xl bg-[#b42347] px-6 py-3 font-bold text-white shadow-[0_8px_22px_rgba(180,35,71,0.18)] transition-colors hover:bg-[#921b39] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#a32972] disabled:cursor-not-allowed disabled:opacity-50"
                         >
                             {loading ? "Logging out..." : "Log Out"}
                         </button>
 
                         <Link
-                           href="/feed"
-                           className="rounded-lg border px-5 py-2 text-gray-600 transition hover:bg-gray-100"
+                            href="/feed"
+                            className="inline-flex min-h-12 items-center justify-center rounded-xl border border-[#a8bff1] bg-white px-6 py-3 font-bold text-[#243f8f] transition-colors hover:bg-[#edf3ff] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#a32972]"
                         >
                             Cancel
                         </Link>

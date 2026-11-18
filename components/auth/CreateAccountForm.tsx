@@ -148,10 +148,10 @@ export default function CreateAccountForm() {
         }
     }
 
-    return (
+  return (
     <form
       onSubmit={handleSubmit}
-      className="space-y-5 max-w-md"
+      className="mx-auto w-full max-w-md space-y-6 text-[#172653]"
       aria-describedby={error || success ? "form-feedback" : undefined}
     >
       {/* FEEDBACK MESSAGES */}
@@ -161,16 +161,16 @@ export default function CreateAccountForm() {
           id="form-feedback"
           role={error ? "alert" : "status"}
           aria-live="polite"
-          className="space-y-2"
+          className="space-y-3"
         >
           {error && (
-            <p className="rounded-md border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-600">
+            <p className="rounded-xl border border-rose-300 bg-rose-50 px-4 py-3 text-sm font-medium leading-6 text-rose-800">
               {error}
             </p>
           )}
 
           {success && (
-            <p className="rounded-md border border-green-200 bg-green-50 px-4 py-3 text-sm text-green-700">
+            <p className="rounded-xl border border-emerald-300 bg-emerald-50 px-4 py-3 text-sm font-medium leading-6 text-emerald-800">
               {success}
             </p>
           )}
@@ -179,8 +179,8 @@ export default function CreateAccountForm() {
 
       {/* EMAIL */}
 
-      <div className="space-y-1">
-        <label htmlFor="email" className="text-sm font-medium">
+      <div className="space-y-2">
+        <label htmlFor="email" className="text-sm font-bold text-[#243b73]">
           Email
         </label>
 
@@ -189,7 +189,7 @@ export default function CreateAccountForm() {
           type="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          className="w-full rounded-md border px-3 py-2"
+          className="min-h-12 w-full rounded-xl border border-[#c8d5ef] bg-white px-4 py-3 text-[#172653] shadow-sm outline-none transition-colors focus:border-[#a32972] focus:ring-2 focus:ring-[#f2b7df] disabled:cursor-not-allowed disabled:bg-[#f3f5fa] disabled:opacity-70"
           disabled={loading}
           autoComplete="email"
         />
@@ -197,8 +197,8 @@ export default function CreateAccountForm() {
 
       {/* USERNAME */}
 
-      <div className="space-y-1">
-        <label htmlFor="username" className="text-sm font-medium">
+      <div className="space-y-2">
+        <label htmlFor="username" className="text-sm font-bold text-[#243b73]">
           Username
         </label>
 
@@ -207,7 +207,7 @@ export default function CreateAccountForm() {
           type="text"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
-          className="w-full rounded-md border px-3 py-2"
+          className="min-h-12 w-full rounded-xl border border-[#c8d5ef] bg-white px-4 py-3 text-[#172653] shadow-sm outline-none transition-colors focus:border-[#a32972] focus:ring-2 focus:ring-[#f2b7df] disabled:cursor-not-allowed disabled:bg-[#f3f5fa] disabled:opacity-70"
           disabled={loading}
           autoComplete="username"
         />
@@ -215,8 +215,8 @@ export default function CreateAccountForm() {
 
       {/* PASSWORD */}
 
-      <div className="space-y-1">
-        <label htmlFor="password" className="text-sm font-medium">
+      <div className="space-y-2">
+        <label htmlFor="password" className="text-sm font-bold text-[#243b73]">
           Password
         </label>
 
@@ -225,7 +225,7 @@ export default function CreateAccountForm() {
           type="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          className="w-full rounded-md border px-3 py-2"
+          className="min-h-12 w-full rounded-xl border border-[#c8d5ef] bg-white px-4 py-3 text-[#172653] shadow-sm outline-none transition-colors focus:border-[#a32972] focus:ring-2 focus:ring-[#f2b7df] disabled:cursor-not-allowed disabled:bg-[#f3f5fa] disabled:opacity-70"
           disabled={loading}
           autoComplete="new-password"
         />
@@ -233,8 +233,8 @@ export default function CreateAccountForm() {
 
       {/* FIRST NAME */}
 
-      <div className="space-y-1">
-        <label htmlFor="firstName" className="text-sm font-medium">
+      <div className="space-y-2">
+        <label htmlFor="firstName" className="text-sm font-bold text-[#243b73]">
           First Name
         </label>
 
@@ -243,7 +243,7 @@ export default function CreateAccountForm() {
           type="text"
           value={firstName}
           onChange={(e) => setFirstName(e.target.value)}
-          className="w-full rounded-md border px-3 py-2"
+          className="min-h-12 w-full rounded-xl border border-[#c8d5ef] bg-white px-4 py-3 text-[#172653] shadow-sm outline-none transition-colors focus:border-[#a32972] focus:ring-2 focus:ring-[#f2b7df] disabled:cursor-not-allowed disabled:bg-[#f3f5fa] disabled:opacity-70"
           disabled={loading}
           autoComplete="given-name"
         />
@@ -251,8 +251,8 @@ export default function CreateAccountForm() {
 
       {/* LAST NAME */}
 
-      <div className="space-y-1">
-        <label htmlFor="lastName" className="text-sm font-medium">
+      <div className="space-y-2">
+        <label htmlFor="lastName" className="text-sm font-bold text-[#243b73]">
           Last Name
         </label>
 
@@ -261,7 +261,7 @@ export default function CreateAccountForm() {
           type="text"
           value={lastName}
           onChange={(e) => setLastName(e.target.value)}
-          className="w-full rounded-md border px-3 py-2"
+          className="min-h-12 w-full rounded-xl border border-[#c8d5ef] bg-white px-4 py-3 text-[#172653] shadow-sm outline-none transition-colors focus:border-[#a32972] focus:ring-2 focus:ring-[#f2b7df] disabled:cursor-not-allowed disabled:bg-[#f3f5fa] disabled:opacity-70"
           disabled={loading}
           autoComplete="family-name"
         />
@@ -269,8 +269,8 @@ export default function CreateAccountForm() {
 
       {/* BIRTHDAY */}
 
-      <div className="space-y-1">
-        <label htmlFor="birthday" className="text-sm font-medium">
+      <div className="space-y-2">
+        <label htmlFor="birthday" className="text-sm font-bold text-[#243b73]">
           Birthday
         </label>
 
@@ -279,7 +279,7 @@ export default function CreateAccountForm() {
           type="date"
           value={birthday}
           onChange={(e) => setBirthday(e.target.value)}
-          className="w-full rounded-md border px-3 py-2"
+          className="min-h-12 w-full rounded-xl border border-[#c8d5ef] bg-white px-4 py-3 text-[#172653] shadow-sm outline-none transition-colors focus:border-[#a32972] focus:ring-2 focus:ring-[#f2b7df] disabled:cursor-not-allowed disabled:bg-[#f3f5fa] disabled:opacity-70"
           disabled={loading}
           autoComplete="bday"
         />
@@ -287,8 +287,8 @@ export default function CreateAccountForm() {
 
       {/* CITY */}
 
-      <div className="space-y-1">
-        <label htmlFor="city" className="text-sm font-medium">
+      <div className="space-y-2">
+        <label htmlFor="city" className="text-sm font-bold text-[#243b73]">
           City
         </label>
 
@@ -297,7 +297,7 @@ export default function CreateAccountForm() {
           type="text"
           value={city}
           onChange={(e) => setCity(e.target.value)}
-          className="w-full rounded-md border px-3 py-2"
+          className="min-h-12 w-full rounded-xl border border-[#c8d5ef] bg-white px-4 py-3 text-[#172653] shadow-sm outline-none transition-colors focus:border-[#a32972] focus:ring-2 focus:ring-[#f2b7df] disabled:cursor-not-allowed disabled:bg-[#f3f5fa] disabled:opacity-70"
           disabled={loading}
           autoComplete="family-name"
         />
@@ -305,8 +305,8 @@ export default function CreateAccountForm() {
 
       {/* COUNTRY */}
 
-      <div className="space-y-1">
-        <label htmlFor="country" className="text-sm font-medium">
+      <div className="space-y-2">
+        <label htmlFor="country" className="text-sm font-bold text-[#243b73]">
           Country
         </label>
 
@@ -315,38 +315,38 @@ export default function CreateAccountForm() {
           type="text"
           value={country}
           onChange={(e) => setCountry(e.target.value)}
-          className="w-full rounded-md border px-3 py-2"
+          className="min-h-12 w-full rounded-xl border border-[#c8d5ef] bg-white px-4 py-3 text-[#172653] shadow-sm outline-none transition-colors focus:border-[#a32972] focus:ring-2 focus:ring-[#f2b7df] disabled:cursor-not-allowed disabled:bg-[#f3f5fa] disabled:opacity-70"
           disabled={loading}
           autoComplete="family-name"
         />
       </div>
 
       {/* Tech Stack */}
-      
+
       <div className="space-y-3">
-        <label className="text-sm font-medium">
+        <label className="text-sm font-bold text-[#243b73]">
           Tech Stack
         </label>
 
         {techStack.map((skill, index) => (
-          <div key={index} className="flex gap-2">
+          <div key={index} className="flex min-w-0 items-center gap-2">
             <input
-             key={index}
-             type="text"
-             value={skill}
-             onChange={(e) =>
-              updateTechnology(index, e.target.value)
-             }
-             placeholder="Enter A Technology"
-             className="w-full rounded-md border px-3 py-2"
-             disabled={loading}
+              key={index}
+              type="text"
+              value={skill}
+              onChange={(e) =>
+                updateTechnology(index, e.target.value)
+              }
+              placeholder="Enter A Technology"
+              className="min-h-12 min-w-0 w-full flex-1 rounded-xl border border-[#c8d5ef] bg-white px-4 py-3 text-[#172653] shadow-sm outline-none transition-colors placeholder:text-[#7785a2] focus:border-[#a32972] focus:ring-2 focus:ring-[#f2b7df] disabled:cursor-not-allowed disabled:bg-[#f3f5fa] disabled:opacity-70"
+              disabled={loading}
             />
 
             <button
-               type="button"
-               onClick={() => removeTechnology(index)}
-               disabled={loading || techStack.length === 1 || !skill.trim()}
-               className="rounded-md border px-4 py-2"
+              type="button"
+              onClick={() => removeTechnology(index)}
+              disabled={loading || techStack.length === 1 || !skill.trim()}
+              className="inline-flex min-h-12 shrink-0 items-center justify-center rounded-xl border border-[#e3a6d2] bg-[#fff1fa] px-3 py-2 text-sm font-bold text-[#92336e] transition-colors hover:bg-[#f9d9ed] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#a32972] disabled:cursor-not-allowed disabled:opacity-40 sm:px-4"
             >
               Remove
             </button>
@@ -354,13 +354,13 @@ export default function CreateAccountForm() {
         ))}
 
         <button
-           type="button"
-           onClick={addTechnology}
-           disabled={
+          type="button"
+          onClick={addTechnology}
+          disabled={
             loading ||
             !techStack[techStack.length - 1].trim()
           }
-           className="rounded-md border px-4 py-2"
+          className="inline-flex min-h-12 items-center justify-center rounded-xl border border-[#a8bff1] bg-[#edf3ff] px-5 py-3 text-sm font-bold text-[#243f8f] transition-colors hover:bg-[#dce8ff] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#a32972] disabled:cursor-not-allowed disabled:opacity-40"
         >
           + Add Technology
         </button>
@@ -372,7 +372,7 @@ export default function CreateAccountForm() {
         type="submit"
         disabled={loading}
         aria-busy={loading}
-        className="w-full rounded-md bg-black px-4 py-2 text-white disabled:opacity-50"
+        className="min-h-12 w-full rounded-xl bg-[linear-gradient(110deg,#243f8f_0%,#59429c_55%,#923774_100%)] px-5 py-3 font-bold text-white shadow-[0_10px_26px_rgba(66,55,145,0.20)] transition-all hover:brightness-110 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#a32972] disabled:cursor-not-allowed disabled:opacity-50"
       >
         {loading ? "Creating account..." : "Create Account"}
       </button>
