@@ -22,23 +22,29 @@ export default async function PostPage({
     // Not Found State
     if (!post) {
         return (
-            <main className="max-w-3xl mx-auto px-6 py-20 text-center space-y-4">
-                <h1 className="text-gray-500">
-                    Post not found
-                </h1>
+            <div className="flex min-h-[70vh] items-center justify-center bg-[linear-gradient(135deg,#f2f5ff,#fff0fa)] px-6 py-16">
+                <section className="w-full max-w-lg rounded-3xl border border-[#e5d8f4] bg-white p-10 text-center shadow-xl">
+                    <p className="text-sm font-bold uppercase tracking-widest text-[#ad3982]">
+                        Post Unavailable
+                    </p>
 
-                <p className="text-gray-500">
-                    The post you're looking for doesn't exist 
-                    or may have been removed.
-                </p>
+                    <h1 className="mt-4 text-3xl font-bold text-[#142557]">
+                        Post not found
+                    </h1>
 
-                <Link
-                   href="/posts"
-                   className="inline-flex rounded-lg bg-blue-600 px-5 py-3 text-white"
-                >
-                    Back To Posts
-                </Link>
-            </main>
+                    <p className="mt-4 leading-7 text-slate-600">
+                        This post may have been removed,
+                        or the link may no longer be valid.
+                    </p>
+
+                    <Link
+                        href="/"
+                        className="mt-8 inline-flex rounded-xl bg-[#243f8f] px-6 py-3 font-semibold text-white transition hover:bg-[#3559b0]"
+                    >
+                        Return to Home
+                    </Link>
+                </section>
+            </div>
         );
     }
 
@@ -72,65 +78,137 @@ export default async function PostPage({
         )
         : false;
 
-    // Render Post
-    return (
-        <main
-           className="min-h-screen bg-gray-50"
-           aria-labelledby="post-title"
-        >
-            <article className="max-w-4xl mx-auto px-6 py-14 space-y-10">
-                <header className="space-y-5">
-                    {isOwner && (
-                        <PostOptions postId={String(post._id)} />
-                    )}
-                    <h1
-                       id="post-title"
-                       className="text-5xl font-bold tracking-tight text-gray-900"
+        // Format Post Date
+        const createdAt = new Date(
+            post.createdAt
+        ).toLocaleDateString("en-US", {
+            month: "long",
+            day: "numeric",
+            year: "numeric",
+            timeZone: "UTC",
+        });
+
+        // Navigate Back Accoring To Authentication State
+        const backHref = decoded ? "/feed" : "/";
+        
+        // Render Post
+         return (
+        <div className="min-h-screen bg-[linear-gradient(180deg,#edf3ff_0%,#fff2fa_55%,#f4f6ff_100%)] text-[#172653]">
+
+            {/* Post Header */}
+            <section className="bg-[linear-gradient(120deg,#0b1c4d_0%,#29448e_58%,#773c89_100%)] px-6 py-12 text-white sm:py-16">
+                <div className="mx-auto max-w-4xl">
+
+                    <Link
+                        href={backHref}
+                        className="inline-flex items-center rounded-lg border border-white/25 px-4 py-2 text-sm font-medium text-[#f9d1ed] transition hover:bg-white/10 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-pink-300"
                     >
+                        ← {decoded ? "Back to Feed" : "Back to Home"}
+                    </Link>
+
+                    <p className="mt-10 text-sm font-bold uppercase tracking-widest text-[#f7b3e0]">
+                        Community Post
+                    </p>
+
+                    <h1 className="mt-4 break-words text-4xl font-bold leading-tight tracking-tight sm:text-5xl">
                         {post.title}
                     </h1>
 
-                    <p className="text-gray-500">
-                        Written by {" "}
-                        <span className="font-medium text-gray-700">
-                            {post.authorId?.username ?? "Unknown"}
-                        </span>
-                    </p>
+                    <div className="mt-6 flex flex-wrap items-center gap-3 text-sm text-[#dbe6ff]">
+                        {post.authorId?.username ? (
+                            <Link
+                                href={`/profile/${encodeURIComponent(post.authorId.username)}`}
+                                className="font-semibold text-[#ffd1ec] hover:underline"
+                            >
+                                @{post.authorId.username}
+                            </Link>
+                        ) : (
+                            <span>Unknown User</span>
+                        )}
+
+                        <span aria-hidden="true">•</span>
+
+                        <time dateTime={post.createdAt.toISOString()}>
+                            {createdAt}
+                        </time>
+                    </div>
+                </div>
+            </section>
+
+            {/* Post Content And Interactions */}
+            <div className="mx-auto max-w-4xl space-y-8 px-4 py-10 sm:px-6">
+
+                {/* Post Content */}
+                <article className="overflow-hidden rounded-3xl border border-[#dce3f7] bg-white shadow-[0_15px_45px_rgba(35,50,104,0.08)]">
 
                     {post.image?.trim() && (
                         <img
-                           src={post.image}
-                           alt={`${post.title} featured image`}
-                           className="w-full aspect-[16/9] object-contain rounded-2xl border bg-gray-100"
+                            src={post.image}
+                            alt={`${post.title} featured image`}
+                            className="max-h-[520px] w-full bg-[#f3f5ff] object-contain"
                         />
                     )}
-                </header>
 
-                <section
-                   className="rounded-2xl border bg-white p-8 shadow-sm"
-                   aria-label="Post content"
-                >
-                    <p className="whitespace-pre-wrap leading-8 text-gray-700">
-                        {post.body}
-                    </p>
+                    <div className="p-6 sm:p-9">
+                        <p className="whitespace-pre-wrap break-words text-base leading-8 text-slate-700">
+                            {post.body}
+                        </p>
+                    </div>
+                </article>
+
+                {/* Post Owner Controls */}
+                {isOwner && (
+                    <div className="rounded-2xl border border-[#e8d9f4] bg-white p-5 shadow-sm">
+                        <p className="mb-3 text-xs font-bold uppercase tracking-widest text-[#a52d79]">
+                            Manage Your Post
+                        </p>
+
+                        <PostOptions postId={postId} />
+                    </div>
+                )}
+
+                {/* Reactions */}
+                <section className="rounded-2xl border border-[#dce3f7] bg-white p-6 shadow-sm">
+                    <h2 className="mb-4 text-lg font-bold text-[#172653]">
+                        Reactions
+                    </h2>
+
+                    <PostReactionButton
+                        postId={postId}
+                        initialLiked={initialLiked}
+                        initialCount={initialCount}
+                    />
                 </section>
 
-                <PostReactionButton
-                   postId={postId}
-                   initialLiked={initialLiked}
-                   initialCount={initialCount}
-                />
+                {/* Comments */}
+                <section
+                    aria-labelledby="discussion-title"
+                    className="space-y-6"
+                >
+                    <div>
+                        <p className="text-xs font-bold uppercase tracking-widest text-[#a52d79]">
+                            Community Discussion
+                        </p>
 
-                <CommentList
-                   postId={postId}
-                   currentUserId={decoded?.userId}
-                   postOwnerId={
-                    post.authorId
-                        ? String(post.authorId._id)
-                        : undefined
-                   }
-                />
-            </article>
-        </main>
+                        <h2
+                            id="discussion-title"
+                            className="mt-2 text-2xl font-bold text-[#172653]"
+                        >
+                            Join the conversation
+                        </h2>
+                    </div>
+
+                    <CommentList
+                        postId={postId}
+                        currentUserId={decoded?.userId}
+                        postOwnerId={
+                            post.authorId
+                                ? String(post.authorId._id)
+                                : undefined
+                        }
+                    />
+                </section>
+            </div>
+        </div>
     );
 }
